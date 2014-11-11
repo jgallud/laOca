@@ -186,7 +186,6 @@ function Laberinto(){
 	this.titulo="Laberinto";
 	this.cae=function(ficha){
 		console.log("Caíste en el Laberinto");
-		//ficha.moverSinCaer(this.otroPuente);
 	}
 }
 
@@ -194,7 +193,6 @@ function Carcel(){
 	this.titulo="Carcel";
 	this.cae=function(ficha){
 		console.log("Caíste en la Cárcel");
-		//ficha.moverSinCaer(this.otroPuente);
 	}
 }
 
@@ -202,7 +200,6 @@ function Calavera(){
 	this.titulo="Calavera";
 	this.cae=function(ficha){
 		console.log("Caíste en la Calavera");
-		//ficha.moverSinCaer(this.otroPuente);
 	}
 }
 
