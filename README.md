@@ -1,4 +1,4 @@
 laOca
 =====
 
-Juego de La Oca (primera iteración)
+Diseño en Javascript del primer entregable (tras finalizar el primer sprint) del juego de La Oca.
