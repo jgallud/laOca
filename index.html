@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>El Juego de la Oca</title>
+	</head>
+	<body>
+		<script src="js/laOca.js"></script>
+		<script>
+
+			tablero = new Tablero();
+			coleccionFichas=[new Ficha("roja"),new Ficha("azul"),new Ficha("verde")];
+			juego = new LaOca(tablero, coleccionFichas,2);
+
+			ju1 = new Jugador("Pepe",juego);
+			ju1.asignarFicha();
+
+			ju2 = new Jugador("Luis",juego);
+			ju2.asignarFicha();
+
+			juego.setTurno(ju1);
+		</script>
+	</body>
+</html>
