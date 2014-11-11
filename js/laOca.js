@@ -168,7 +168,6 @@ function Posada(){
 	this.titulo="Posada";
 	this.cae=function(ficha){
 		console.log("Caíste en la Posada");
-		//ficha.moverSinCaer(this.otroPuente);
 	}
 }
 
