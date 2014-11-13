@@ -12,6 +12,34 @@ function LaOca2FichasFactory(){
 	}
 }
 
+function CasillasFactory(tablero){
+	this.tablero=tablero;
+	this.crearCasillaNormal=function(posicion){
+		return new Casilla(posicion,new Normal(),this.tablero);
+	}
+	this.crearCasillaPosada=function(posicion){
+		return new Casilla(posicion,new Posada(),this.tablero);
+	}
+	this.crearCasillaOca=function(posicion,siguiente){
+		return new Casilla(posicion,new Oca(siguiente),this.tablero);
+	}
+	this.crearCasillaPuente=function(posicion,siguiente){
+		return new Casilla(posicion, new Puente(siguiente),this.tablero);
+	}
+	this.crearCasillaDados=function(posicion,siguiente){
+		return new Casilla(posicion, new Dados(siguiente),this.tablero);
+	}
+	this.crearCasillaLaberinto=function(posicion){
+		return new Casilla(posicion,new Laberinto(),this.tablero);
+	}	
+	this.crearCasillaCarcel=function(posicion){
+		return new Casilla(posicion,new Carcel(),this.tablero);
+	}
+	this.crearCasillaCalavera=function(posicion){
+		return new Casilla(posicion,new Calavera(),this.tablero);
+	}
+}
+
 function LaOca(tablero, coleccionFichas,numeroJugadores){
 	this.tablero = tablero;
 	this.coleccionFichas=coleccionFichas;
@@ -83,36 +111,37 @@ function Tablero(){
 	this.iniciarTablero=function(){
 		this.casillas[0]="El Juego de la Oca";
 		for(i=1;i<=63;i++){
-			this.casillas[i]=new Casilla(i,this);
+			this.casillas[i]=casillasFactory.crearCasillaNormal(i);
+			this.casillas[i].asignarTablero(this);
 		}
 	};
 
-	this.asignarCasilla=function(posicion,tema){
-		this.casillas[posicion].tema=tema;
-	}
+	// this.asignarCasilla=function(posicion,tema){
+	// 	this.casillas[posicion].tema=tema;
+	// }
 
 	this.configurarTablero=function(){
-		this.asignarCasilla(6, new Puente(12));
-		this.asignarCasilla(12,new Puente(6));
-		this.asignarCasilla(19,new Posada());
-		this.asignarCasilla(26,new Dados(53));
-		this.asignarCasilla(53,new Dados(26));
-		this.asignarCasilla(42,new Laberinto());
-		this.asignarCasilla(52,new Carcel());
-		this.asignarCasilla(58,new Calavera());	
-		this.asignarCasilla(5,new Oca(9));
-		this.asignarCasilla(9, new Oca(14));
-		this.asignarCasilla(14, new Oca(18));
-		this.asignarCasilla(18, new Oca(23));
-		this.asignarCasilla(23, new Oca(27));
-		this.asignarCasilla(27, new Oca(32));
-		this.asignarCasilla(32, new Oca(36));
-		this.asignarCasilla(36, new Oca(41));
-		this.asignarCasilla(41, new Oca(45));
-		this.asignarCasilla(45, new Oca(50));
-		this.asignarCasilla(50, new Oca(54));
-		this.asignarCasilla(54, new Oca(59));
-		this.asignarCasilla(59, new Oca(63));							
+		this.casillas[6] = casillasFactory.crearCasillaPuente(6,12);
+		this.casillas[12] = casillasFactory.crearCasillaPuente(12,6);		
+		this.casillas[19] = casillasFactory.crearCasillaPosada(19);
+		this.casillas[26] = casillasFactory.crearCasillaDados(25,53);
+		this.casillas[53] = casillasFactory.crearCasillaDados(53,26);		
+		this.casillas[42] = casillasFactory.crearCasillaLaberinto(42);
+		this.casillas[52] = casillasFactory.crearCasillaCarcel(52);
+		this.casillas[58] = casillasFactory.crearCasillaCalavera(58);
+		this.casillas[5] = casillasFactory.crearCasillaOca(5,9);
+		this.casillas[9] = casillasFactory.crearCasillaOca(9,14);
+		this.casillas[14] = casillasFactory.crearCasillaOca(14,18);				
+		this.casillas[18] = casillasFactory.crearCasillaOca(18,23);		
+		this.casillas[23] = casillasFactory.crearCasillaOca(23,27);		
+		this.casillas[27] = casillasFactory.crearCasillaOca(27,32);
+		this.casillas[32] = casillasFactory.crearCasillaOca(32,36);
+		this.casillas[36] = casillasFactory.crearCasillaOca(36,41);
+		this.casillas[41] = casillasFactory.crearCasillaOca(40,45);
+		this.casillas[45] = casillasFactory.crearCasillaOca(45,50);
+		this.casillas[50] = casillasFactory.crearCasillaOca(50,54);
+		this.casillas[54] = casillasFactory.crearCasillaOca(54,59);
+		this.casillas[59] = casillasFactory.crearCasillaOca(59,63);		
 	}
 
 	this.moverSinCaer=function(ficha,posicion){
@@ -131,13 +160,15 @@ function Tablero(){
 		var nuevaPosicion = this.desplazar(ficha,posicion);
 		ficha.cae(this.casillas[nuevaPosicion]);
 	}
+
+	casillasFactory=new CasillasFactory(this);
 	this.iniciarTablero();
 	this.configurarTablero();
 }
 
-function Casilla(posicion, tablero){
+function Casilla(posicion, tema, tablero){
 	this.posicion=posicion;
-	this.tema=new Normal();
+	this.tema=tema;
 	this.tablero=tablero;
 	this.moverSinCaer=function(ficha,posicion){
 		this.tablero.moverSinCaer(ficha,posicion);
@@ -147,6 +178,9 @@ function Casilla(posicion, tablero){
 	}
 	this.cae=function(ficha){
 		this.tema.cae(ficha);
+	}
+	this.asignarTablero=function(tablero){
+		this.tablero=tablero;
 	}
 }
 
