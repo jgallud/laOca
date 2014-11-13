@@ -1,3 +1,16 @@
+function LaOca2FichasFactory(){
+	this.crearTablero=function(){
+		var tablero = new Tablero();
+		return tablero;
+	}
+	this.crearFichas=function(){
+		var coleccionFichas=[new Ficha("roja"),new Ficha("azul")];
+		return coleccionFichas;
+	}
+	this.crearJuego=function(){
+		return new LaOca(this.crearTablero(),this.crearFichas(),2);
+	}
+}
 
 function LaOca(tablero, coleccionFichas,numeroJugadores){
 	this.tablero = tablero;
