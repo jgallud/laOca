@@ -1,5 +1,3 @@
-//Esto es un comentario
-
 function LaOcaFactory(){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
