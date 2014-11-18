@@ -1,3 +1,4 @@
+
 function LaOcaFactory(){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
