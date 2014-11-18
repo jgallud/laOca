@@ -94,6 +94,11 @@ function FaseInicio(juego){
 	this.lanzar=function(jugador){
 		console.log("Todavía no puedes lanzar los dados");
 	}
+
+	this.esFin=function(){
+		return false;
+	}
+
 }
 
 function FaseJugar(juego){
@@ -105,6 +110,10 @@ function FaseJugar(juego){
 
 	this.lanzar=function(jugador){
 		jugador.turno.lanzar(jugador);		
+	}
+
+	this.esFin=function(){
+		return false;
 	}
 }
 
