@@ -83,6 +83,7 @@ function LaOca(tablero, coleccionFichas,numeroJugadores){
 
 function FaseInicio(juego){
 	this.juego=juego;
+	this.nombre="Inicio";
 	this.asignarFicha=function(jugador){
 		this.juego.asignarFicha(jugador);
 		if (this.juego.coleccionJugadores.length==this.juego.numeroJugadores){
@@ -96,6 +97,7 @@ function FaseInicio(juego){
 
 function FaseJugar(juego){
 	this.juego=juego;
+	this.nombre="Jugar";
 		this.asignarFicha=function(jugador){
 			console.log("Ahora no se puede escoger ficha");
 	}
