@@ -7,9 +7,8 @@
 		<script src="js/laOca.js"></script>
 		<script>
 
-			tablero = new Tablero();
-			coleccionFichas=[new Ficha("roja"),new Ficha("azul"),new Ficha("verde")];
-			juego = new LaOca(tablero, coleccionFichas,2);
+			juego = (new LaOca2FichasFactory()).crearJuego();
+//			juego = (new LaOca3FichasTableroMagico()).crearJuego();
 
 			ju1 = new Jugador("Pepe",juego);
 			ju1.asignarFicha();
