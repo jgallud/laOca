@@ -1,4 +1,5 @@
-function LaOca2FichasBuilder(){
+
+function LaOcaFactory(){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
 		return tablero;
@@ -12,31 +13,30 @@ function LaOca2FichasBuilder(){
 	}
 }
 
-function CasillasFactory(tablero){
-	this.tablero=tablero;
+function CasillasFactory(){
 	this.crearCasillaNormal=function(posicion){
-		return new Casilla(posicion,new Normal(),this.tablero);
+		return new Casilla(posicion,new Normal());
 	}
 	this.crearCasillaPosada=function(posicion){
-		return new Casilla(posicion,new Posada(),this.tablero);
+		return new Casilla(posicion,new Posada());
 	}
 	this.crearCasillaOca=function(posicion,siguiente){
-		return new Casilla(posicion,new Oca(siguiente),this.tablero);
+		return new Casilla(posicion,new Oca(siguiente));
 	}
 	this.crearCasillaPuente=function(posicion,siguiente){
-		return new Casilla(posicion, new Puente(siguiente),this.tablero);
+		return new Casilla(posicion, new Puente(siguiente));
 	}
 	this.crearCasillaDados=function(posicion,siguiente){
-		return new Casilla(posicion, new Dados(siguiente),this.tablero);
+		return new Casilla(posicion, new Dados(siguiente));
 	}
 	this.crearCasillaLaberinto=function(posicion){
-		return new Casilla(posicion,new Laberinto(),this.tablero);
+		return new Casilla(posicion,new Laberinto());
 	}	
 	this.crearCasillaCarcel=function(posicion){
-		return new Casilla(posicion,new Carcel(),this.tablero);
+		return new Casilla(posicion,new Carcel());
 	}
 	this.crearCasillaCalavera=function(posicion){
-		return new Casilla(posicion,new Calavera(),this.tablero);
+		return new Casilla(posicion,new Calavera());
 	}
 }
 
@@ -106,19 +106,33 @@ function FaseJugar(juego){
 	}
 }
 
+function FaseFin(juego){
+	this.juego=juego;
+	this.nombre="Fin";
+	this.asignarFicha=function(jugador){
+		console.log("No hay sitio libre");
+	};
+	this.lanzar=function(ficha,num){
+		console.log("Juego finalizado");
+	};
+	this.esFin=function(){
+		return true;
+	}
+}
+
 function Tablero(){
 	this.casillas=[];
-	this.iniciarTablero=function(){
-		this.casillas[0]="El Juego de la Oca";
-		for(i=1;i<=63;i++){
-			this.casillas[i]=casillasFactory.crearCasillaNormal(i);
-			this.casillas[i].asignarTablero(this);
+	this.iniciarNormal=function(){
+		for(i=0;i<=63;i++){
+			this.casillas[i]=casillasFactory.crearCasillaNormal(i);			
 		}
 	};
 
-	// this.asignarCasilla=function(posicion,tema){
-	// 	this.casillas[posicion].tema=tema;
-	// }
+	this.iniciarTablero=function(){		
+		for(i=0;i<=63;i++){			
+			this.casillas[i].asignarTablero(this);
+		}
+	};
 
 	this.configurarTablero=function(){
 		this.casillas[6] = casillasFactory.crearCasillaPuente(6,12);
@@ -137,7 +151,7 @@ function Tablero(){
 		this.casillas[27] = casillasFactory.crearCasillaOca(27,32);
 		this.casillas[32] = casillasFactory.crearCasillaOca(32,36);
 		this.casillas[36] = casillasFactory.crearCasillaOca(36,41);
-		this.casillas[41] = casillasFactory.crearCasillaOca(40,45);
+		this.casillas[41] = casillasFactory.crearCasillaOca(41,45);
 		this.casillas[45] = casillasFactory.crearCasillaOca(45,50);
 		this.casillas[50] = casillasFactory.crearCasillaOca(50,54);
 		this.casillas[54] = casillasFactory.crearCasillaOca(54,59);
@@ -161,15 +175,16 @@ function Tablero(){
 		ficha.cae(this.casillas[nuevaPosicion]);
 	}
 
-	casillasFactory=new CasillasFactory(this);
-	this.iniciarTablero();
+	casillasFactory=new CasillasFactory();
+	this.iniciarNormal();
 	this.configurarTablero();
+	this.iniciarTablero();
 }
 
-function Casilla(posicion, tema, tablero){
+function Casilla(posicion, tema){
 	this.posicion=posicion;
 	this.tema=tema;
-	this.tablero=tablero;
+	this.tablero=undefined;
 	this.moverSinCaer=function(ficha,posicion){
 		this.tablero.moverSinCaer(ficha,posicion);
 	}
@@ -247,6 +262,14 @@ function Calavera(){
 	this.cae=function(ficha){
 		console.log("Caíste en la Calavera");
 	}
+}
+
+function Fin(){
+	this.titulo="Fin";
+	this.cae=function(ficha){
+		ficha.juego.fase=new FaseFin(ficha.juego);
+		console.log("Fin del juego");
+	}	
 }
 
 function Ficha(color){
