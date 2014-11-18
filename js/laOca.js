@@ -1,4 +1,4 @@
-function LaOca2FichasFactory(){
+function LaOca2FichasBuilder(){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
 		return tablero;
