@@ -70,10 +70,17 @@ function LaOca(tablero, coleccionFichas,numeroJugadores){
 		jugador.turno=new MeToca();
 	}
 	this.cambiarTurno=function(jugador){
-		var indice=this.coleccionJugadores.indexOf(jugador);
-		var siguienteIndice=(indice+1)%(this.coleccionJugadores.length);
-		this.setTurno(this.coleccionJugadores[siguienteIndice]);
-		jugador.turno=new NoMeToca();
+		var indice;
+		var siguienteIndice;
+		indice=this.coleccionJugadores.indexOf(jugador);
+		siguienteIndice=(indice+1)%(this.coleccionJugadores.length);
+		if (this.coleccionJugadores[siguienteIndice].estado.esVivo()){
+			this.setTurno(this.coleccionJugadores[siguienteIndice]);
+			jugador.turno=new NoMeToca();
+		}
+		else{
+			this.coleccionJugadores[siguienteIndice].pasar();
+		}
 	}
 	this.iniciarJuego=function(){
 		this.fase=new FaseInicio(this);
@@ -240,7 +247,9 @@ function Oca(otraOca){
 function Posada(){
 	this.titulo="Posada";
 	this.cae=function(ficha){
-		console.log("Caíste en la Posada");
+		console.log("Caíste en la Posada y pierdes dos turnos");
+		ficha.cambiarTurno();
+		ficha.pierdeTurno(new Pierde2Turnos());
 	}
 }
 
@@ -311,6 +320,9 @@ function Ficha(color){
 	this.cambiarTurno=function(){
 		this.jugador.cambiarTurno();
 	}
+	this.pierdeTurno=function(obj){
+		this.jugador.pierdeTurno(obj);
+	}
 }
 
 function MeToca(){
@@ -327,11 +339,45 @@ function NoMeToca(){
 	}
 }
 
+function Vivo(){
+	this.esVivo=function(){
+		return true;
+	}
+}
+
+function Pierde3Turnos(){
+	this.esVivo=function(){
+		return false;
+	}
+	this.pasar=function(jugador){
+		jugador.estado=new Pierde2Turnos();
+	}
+}
+
+function Pierde2Turnos(){
+	this.esVivo=function(){
+		return false;
+	}
+	this.pasar=function(jugador){
+		jugador.estado=new Pierde1Turno();
+	}
+}
+
+function Pierde1Turno(){
+	this.esVivo=function(){
+		return false;
+	}
+	this.pasar=function(jugador){
+		jugador.estado=new Vivo();
+	}
+}
+
 function Jugador(nombre,juego){
 	this.nombre=nombre;
 	this.ficha=undefined;
 	this.juego=juego;
 	this.turno=new NoMeToca();
+	this.estado=new Vivo();
 
 	this.asignarFicha=function(){
 		this.juego.fase.asignarFicha(this);
@@ -342,5 +388,10 @@ function Jugador(nombre,juego){
 	this.cambiarTurno=function(){
 		this.juego.cambiarTurno(this);
 	}
-
+	this.pierdeTurno=function(obj){
+		this.estado=obj;
+	}
+	this.pasar=function(){
+		this.estado.pasar(this);
+	}
 }
