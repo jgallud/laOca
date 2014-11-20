@@ -1,3 +1,4 @@
+
 function LaOcaFactory(){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
@@ -83,6 +84,7 @@ function LaOca(tablero, coleccionFichas,numeroJugadores){
 
 function FaseInicio(juego){
 	this.juego=juego;
+	this.nombre="Inicio";
 	this.asignarFicha=function(jugador){
 		this.juego.asignarFicha(jugador);
 		if (this.juego.coleccionJugadores.length==this.juego.numeroJugadores){
@@ -92,16 +94,26 @@ function FaseInicio(juego){
 	this.lanzar=function(jugador){
 		console.log("Todavía no puedes lanzar los dados");
 	}
+
+	this.esFin=function(){
+		return false;
+	}
+
 }
 
 function FaseJugar(juego){
 	this.juego=juego;
+	this.nombre="Jugar";
 		this.asignarFicha=function(jugador){
 			console.log("Ahora no se puede escoger ficha");
 	}
 
 	this.lanzar=function(jugador){
 		jugador.turno.lanzar(jugador);		
+	}
+
+	this.esFin=function(){
+		return false;
 	}
 }
 
