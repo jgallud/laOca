@@ -45,8 +45,10 @@ describe("El juego de la Oca...",function(){
 			expect(this.jugador.nombre).toMatch("Pepe");
 		});
 
-		xit("...el juego permite asignar una ficha libre a Pepe",function(){
-
+		it("...el juego permite asignar una ficha libre a Pepe",function(){
+			this.jugador=new Jugador("Pepe",this.juego);
+			this.jugador.asignarFicha();
+			expect(this.jugador.ficha).not.toBeUndefined();
 		});
 	});
 
@@ -376,33 +378,34 @@ describe("El juego de la Oca...",function(){
 		});
 
 		it("La fase es Jugar, el turno lo tiene jug1",function(){
-			expect(this.juego.fase.esJugar()).toEqual(true);
-			expect(this.juego.turno.nombre).toMatch("Pepe");
+			expect(this.juego.fase.nombre).toEqual("Jugar");
+			expect(this.ju1.turno.nombre).toMatch("MeToca");
 		});
 
 		it("jug1 cae en casilla 42 pierde dos turnos",function(){
-			this.juego.turno.ficha.casilla=this.juego.tablero.getCasilla(41);
-			this.juego.fase.lanzar(this.juego.turno.ficha, 1);
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(41);
+			this.ju1.ficha.mover(1);
 			expect(this.ju1.ficha.casilla.posicion).toEqual(42);
-			expect(this.juego.turno.nombre).toMatch("Luis");
-			expect(this.ju1.estado.esPierdeTurno2()).toEqual(true);
+			expect(this.ju2.turno.nombre).toMatch("MeToca");
+			expect(this.ju1.turno.nombre).toMatch("NoMeToca");
+			expect(this.ju1.estado.nombre).toEqual("Pierde2Turnos");
 		});	
 
 		it("jug1 está en el Laberinto y pierde dos turnos",function(){
-			this.juego.turno.ficha.casilla=this.juego.tablero.getCasilla(41);
-			this.juego.fase.lanzar(this.juego.turno.ficha, 1);
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(41);
+			this.ju1.ficha.mover(1);
 			expect(this.ju1.ficha.casilla.posicion).toEqual(42);
-			expect(this.juego.turno.nombre).toMatch("Luis");
-			expect(this.ju1.estado.esPierdeTurno2()).toEqual(true);
+			expect(this.ju2.turno.nombre).toMatch("MeToca");
+			expect(this.ju1.estado.nombre).toEqual("Pierde2Turnos");
 			//this.juego.turno.lanzar(this.ju2.ficha,1);
-			this.juego.cambiarTurno(this.ju2);
-			this.ju1.lanzar(this.ju1.ficha,1);	
-			expect(this.ju1.estado.esPierdeTurno1()).toEqual(true);
+			//this.juego.cambiarTurno(this.ju2);
+			this.ju2.ficha.mover(1);	
+			expect(this.ju1.estado.nombre).toEqual("Pierde1Turno");
 			//this.juego.turno.lanzar(this.ju2.ficha,1);
-			this.juego.cambiarTurno(this.ju2);
-			this.ju1.lanzar(this.ju1.ficha,1);		
+			//this.juego.cambiarTurno(this.ju2);
+			this.ju2.ficha.mover(1);		
 			//console.log(this.ju1.estado);		
-			expect(this.ju1.estado.esVivo()).toEqual(true);			
+			expect(this.ju1.estado.nombre).toEqual("Vivo");
 		});	
 	});
 
@@ -421,33 +424,36 @@ describe("El juego de la Oca...",function(){
 		});
 
 		it("La fase es Jugar, el turno lo tiene jug1",function(){
-			expect(this.juego.fase.esJugar()).toEqual(true);
-			expect(this.juego.turno.nombre).toMatch("Pepe");
+			expect(this.juego.fase.nombre).toEqual("Jugar");
+			expect(this.ju1.turno.nombre).toMatch("MeToca");
 		});
 
 		it("jug1 cae en casilla 52 pierde tres turnos",function(){
-			this.juego.turno.ficha.casilla=this.juego.tablero.getCasilla(51);
-			this.juego.fase.lanzar(this.juego.turno.ficha, 1);
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(51);
+			this.ju1.ficha.mover(1);
 			expect(this.ju1.ficha.casilla.posicion).toEqual(52);
-			expect(this.juego.turno.nombre).toMatch("Luis");
-			expect(this.ju1.estado.esPierdeTurno3()).toEqual(true);
+			expect(this.ju2.turno.nombre).toMatch("MeToca");
+			expect(this.ju1.turno.nombre).toMatch("NoMeToca");
+			expect(this.ju1.estado.nombre).toEqual("Pierde3Turnos");
 		});	
 
 		it("jug1 está en el Cárcel y pierde tres turnos",function(){
-			this.juego.turno.ficha.casilla=this.juego.tablero.getCasilla(51);
-			this.juego.fase.lanzar(this.juego.turno.ficha, 1);
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(51);
+			this.ju1.ficha.mover(1);
 			expect(this.ju1.ficha.casilla.posicion).toEqual(52);
-			expect(this.juego.turno.nombre).toMatch("Luis");
-			expect(this.ju1.estado.esPierdeTurno3()).toEqual(true);
-			this.juego.cambiarTurno(this.ju2);
-			this.ju1.lanzar(this.ju1.ficha,1);	
-			expect(this.ju1.estado.esPierdeTurno2()).toEqual(true);
-			this.juego.cambiarTurno(this.ju2);
-			this.ju1.lanzar(this.ju1.ficha,1);	
-			expect(this.ju1.estado.esPierdeTurno1()).toEqual(true);
-			this.juego.cambiarTurno(this.ju2);
-			this.ju1.lanzar(this.ju1.ficha,1);		
-			expect(this.ju1.estado.esVivo()).toEqual(true);			
+			expect(this.ju2.turno.nombre).toMatch("MeToca");
+			expect(this.ju1.estado.nombre).toEqual("Pierde3Turnos");
+			//this.juego.turno.lanzar(this.ju2.ficha,1);
+			//this.juego.cambiarTurno(this.ju2);
+			this.ju2.ficha.mover(1);	
+			expect(this.ju1.estado.nombre).toEqual("Pierde2Turnos");
+			//this.juego.turno.lanzar(this.ju2.ficha,1);
+			//this.juego.cambiarTurno(this.ju2);
+			this.ju2.ficha.mover(1);	
+			expect(this.ju1.estado.nombre).toEqual("Pierde1Turno");
+			this.ju2.ficha.mover(1);		
+			//console.log(this.ju1.estado);		
+			expect(this.ju1.estado.nombre).toEqual("Vivo");
 		});	
 	});
 
@@ -466,15 +472,15 @@ describe("El juego de la Oca...",function(){
 		});
 
 		it("La fase es Jugar, el turno lo tiene jug1",function(){
-			expect(this.juego.fase.esJugar()).toEqual(true);
-			expect(this.juego.turno.nombre).toMatch("Pepe");
+			expect(this.juego.fase.nombre).toEqual("Jugar");
+			expect(this.ju1.turno.nombre).toMatch("MeToca");
 		});
 
 		it("jug1 cae en casilla 58 pierde y vuelve a la 1",function(){
-			this.juego.turno.ficha.casilla=this.juego.tablero.getCasilla(57);
-			this.juego.fase.lanzar(this.juego.turno.ficha, 1);
-			expect(this.ju1.ficha.casilla.posicion).toEqual(1);
-			expect(this.juego.turno.nombre).toMatch("Luis");
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(57);
+			this.ju1.ficha.mover(1);
+			expect(this.ju1.ficha.casilla.posicion).toEqual(0);
+			expect(this.ju2.turno.nombre).toMatch("MeToca");
 		});	
 	});
 
@@ -493,15 +499,15 @@ describe("El juego de la Oca...",function(){
 		});
 
 		it("La fase es Jugar, el turno lo tiene jug1",function(){
-			expect(this.juego.fase.esJugar()).toEqual(true);
-			expect(this.juego.turno.nombre).toMatch("Pepe");
+			expect(this.juego.fase.nombre).toEqual("Jugar");
+			expect(this.ju1.turno.nombre).toMatch("MeToca");
 		});
 
 		it("jug1 cae en casilla 63 y gana, el juego termina",function(){
-			this.juego.turno.ficha.casilla=this.juego.tablero.getCasilla(62);
-			this.juego.fase.lanzar(this.juego.turno.ficha, 1);
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(62);
+			this.ju1.ficha.mover(1);
 			expect(this.ju1.ficha.casilla.posicion).toEqual(63);
-			expect(this.juego.fase.esFin()).toEqual(true);
+			expect(this.juego.fase.nombre).toEqual("Fin");
 		});					
 	})
 })

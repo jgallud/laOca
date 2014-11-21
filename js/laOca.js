@@ -41,6 +41,9 @@ function CasillasFactory(){
 	this.crearCasillaCalavera=function(posicion){
 		return new Casilla(posicion,new Calavera());
 	}
+	this.crearCasillaFin=function(posicion){
+		return new Casilla(posicion, new Fin());
+	}
 }
 
 function LaOca(tablero, coleccionFichas,numeroJugadores){
@@ -187,7 +190,8 @@ function Tablero(){
 		this.casillas[45] = casillasFactory.crearCasillaOca(45,50);
 		this.casillas[50] = casillasFactory.crearCasillaOca(50,54);
 		this.casillas[54] = casillasFactory.crearCasillaOca(54,59);
-		this.casillas[59] = casillasFactory.crearCasillaOca(59,63);		
+		this.casillas[59] = casillasFactory.crearCasillaOca(59,63);
+		this.casillas[63] = casillasFactory.crearCasillaFin(63);				
 	}
 
 	this.moverSinCaer=function(ficha,posicion){
@@ -327,7 +331,7 @@ function Calavera(){
 function Fin(){
 	this.titulo="Fin";
 	this.cae=function(ficha){
-		ficha.juego.fase=new FaseFin(ficha.juego);
+		ficha.jugador.juego.fase=new FaseFin(ficha.juego);
 		console.log("Fin del juego");
 	}	
 }
