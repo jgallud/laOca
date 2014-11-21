@@ -402,41 +402,58 @@ function EnPozo(){
 	}
 }
 
-function Pierde3Turnos(){
-	this.nombre="Pierde3Turnos";
+function PierdeNTurnos(numero){
+	this.nombre="Pierde"+numero+"Turnos";
+	this.numero=numero;
 	this.esVivo=function(){
 		return false;
 	}
+	this.tomarTurno=function(jugador){
+		console.log("Faltan "+this.numero+" turnos sin jugar");
+		jugador.estado=new PierdeNTurnos(this.numero-1);
+		jugador.cambiarTurno();
+	}
+}
+
+function Pierde3Turnos(){
+//	this.nombre="Pierde3Turnos";
+//	this.esVivo=function(){
+//		return false;
+//	}
 	this.tomarTurno=function(jugador){
 		console.log("Faltan dos turnos sin jugar");
 		jugador.estado=new Pierde2Turnos();
 		jugador.cambiarTurno();
 	}
 }
+Pierde3Turnos.prototype= new PierdeNTurnos(3);
 
 function Pierde2Turnos(){
-	this.nombre="Pierde2Turnos";
-	this.esVivo=function(){
-		return false;
-	}
+	//this.nombre="Pierde2Turnos";
+	//this.esVivo=function(){
+	//	return false;
+	//}
 	this.tomarTurno=function(jugador){	
 		console.log("Faltan un turno sin jugar");
 		jugador.estado=new Pierde1Turno();
 		jugador.cambiarTurno();
 	}
 }
+Pierde2Turnos.prototype=new PierdeNTurnos(2);
 
 function Pierde1Turno(){
-	this.nombre="Pierde1Turno";
-	this.esVivo=function(){
-		return false;
-	}
+//	this.nombre="Pierde1Turno";
+//	this.esVivo=function(){
+//		return false;
+//	}
 	this.tomarTurno=function(jugador){
 		console.log("El siguiente ya te toca");
 		jugador.estado=new Vivo();
 		jugador.cambiarTurno();
 	}
 }
+
+Pierde1Turno.prototype=new PierdeNTurnos(1);
 
 function Jugador(nombre,juego){
 	this.nombre=nombre;

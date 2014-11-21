@@ -83,7 +83,7 @@ describe("El juego de la Oca...",function(){
 			expect(this.juego.tablero.casillas[58].tema.titulo).toEqual("Calavera");
 		});
 
-		it("...las casillas 5,9,14,18,23,27,32... tienen Oca",function(){
+		it("...las casillas 5,9,14,18,23,27,32,36,41,45,50,54 y 59 tienen Oca",function(){
 			expect(this.juego.tablero.casillas[5].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[9].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[14].tema.titulo).toEqual("Oca");
@@ -91,7 +91,12 @@ describe("El juego de la Oca...",function(){
 			expect(this.juego.tablero.casillas[23].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[27].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[32].tema.titulo).toEqual("Oca");
-			//faltan casillas (completar)
+			expect(this.juego.tablero.casillas[36].tema.titulo).toEqual("Oca");
+			expect(this.juego.tablero.casillas[41].tema.titulo).toEqual("Oca");
+			expect(this.juego.tablero.casillas[45].tema.titulo).toEqual("Oca");
+			expect(this.juego.tablero.casillas[50].tema.titulo).toEqual("Oca");			
+			expect(this.juego.tablero.casillas[54].tema.titulo).toEqual("Oca");		
+			expect(this.juego.tablero.casillas[59].tema.titulo).toEqual("Oca");	
 		})
 	});
 
@@ -271,7 +276,7 @@ describe("El juego de la Oca...",function(){
 			//this.juego.turno.lanzar(this.ju2.ficha,1);
 			//this.juego.cambiarTurno(this.ju2);
 			this.ju2.ficha.mover(1);	
-			expect(this.ju1.estado.nombre).toEqual("Pierde1Turno");
+			expect(this.ju1.estado.nombre).toEqual("Pierde1Turnos");
 			//this.juego.turno.lanzar(this.ju2.ficha,1);
 			//this.juego.cambiarTurno(this.ju2);
 			this.ju2.ficha.mover(1);		
@@ -400,7 +405,7 @@ describe("El juego de la Oca...",function(){
 			//this.juego.turno.lanzar(this.ju2.ficha,1);
 			//this.juego.cambiarTurno(this.ju2);
 			this.ju2.ficha.mover(1);	
-			expect(this.ju1.estado.nombre).toEqual("Pierde1Turno");
+			expect(this.ju1.estado.nombre).toEqual("Pierde1Turnos");
 			//this.juego.turno.lanzar(this.ju2.ficha,1);
 			//this.juego.cambiarTurno(this.ju2);
 			this.ju2.ficha.mover(1);		
@@ -450,7 +455,7 @@ describe("El juego de la Oca...",function(){
 			//this.juego.turno.lanzar(this.ju2.ficha,1);
 			//this.juego.cambiarTurno(this.ju2);
 			this.ju2.ficha.mover(1);	
-			expect(this.ju1.estado.nombre).toEqual("Pierde1Turno");
+			expect(this.ju1.estado.nombre).toEqual("Pierde1Turnos");
 			this.ju2.ficha.mover(1);		
 			//console.log(this.ju1.estado);		
 			expect(this.ju1.estado.nombre).toEqual("Vivo");
