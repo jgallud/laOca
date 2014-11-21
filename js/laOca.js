@@ -1,5 +1,22 @@
+function LaOcaFactory(colores){
+	this.crearTablero=function(){
+		var tablero = new Tablero();
+		return tablero;
+	}
+	this.crearFichas=function(colores){
+		var coleccionFichas=[];
+		for(var i in colores){
+			coleccionFichas.push(new Ficha(colores[i]));
+		}
+	//	var coleccionFichas=colores;//[new Ficha("roja"),new Ficha("azul")];
+		return coleccionFichas;
+	}
+	this.crearJuego=function(){
+		return new LaOca(this.crearTablero(),this.crearFichas(colores));
+	}
+}
 
-function LaOcaFactory(){
+function LaOcaFactory2(){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
 		return tablero;
@@ -9,7 +26,21 @@ function LaOcaFactory(){
 		return coleccionFichas;
 	}
 	this.crearJuego=function(){
-		return new LaOca(this.crearTablero(),this.crearFichas(),2);
+		return new LaOca(this.crearTablero(),this.crearFichas());
+	}
+}
+
+function LaOcaFactory3(){
+	this.crearTablero=function(){
+		var tablero = new Tablero();
+		return tablero;
+	}
+	this.crearFichas=function(){
+		var coleccionFichas=[new Ficha("roja"),new Ficha("azul"), new Ficha("verde")];
+		return coleccionFichas;
+	}
+	this.crearJuego=function(){
+		return new LaOca(this.crearTablero(),this.crearFichas());
 	}
 }
 
@@ -46,13 +77,13 @@ function CasillasFactory(){
 	}
 }
 
-function LaOca(tablero, coleccionFichas,numeroJugadores){
+function LaOca(tablero, coleccionFichas){
 	this.tablero = tablero;
 	this.coleccionFichas=coleccionFichas;
 	this.coleccionJugadores=[];
 	this.turno=undefined;
 	this.fase=undefined;
-	this.numeroJugadores=numeroJugadores;
+	this.numeroJugadores=undefined;
 
 	this.asignarFicha=function(jugador){
 		var enc=false;
@@ -85,6 +116,7 @@ function LaOca(tablero, coleccionFichas,numeroJugadores){
 		return this.coleccionJugadores[siguienteIndice];
 	}
 	this.iniciarJuego=function(){
+		this.numeroJugadores=this.coleccionFichas.length;
 		this.fase=new FaseInicio(this);
 	}
 

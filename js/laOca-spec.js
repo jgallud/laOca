@@ -100,6 +100,21 @@ describe("El juego de la Oca...",function(){
 		})
 	});
 
+	describe("Comprobamos el funcionamiento de los turnos con tres jugadores",function(){
+		var ju1,ju2,ju3;
+		beforeEach(function(){
+			this.juego = (new LaOcaFactory()).crearJuego();
+			this.ju1=new Jugador("Pepe",this.juego);
+			this.ju1.asignarFicha();
+			this.ju2=new Jugador("Luis",this.juego);
+			this.ju2.asignarFicha();
+			this.ju3=new Jugador("Lola",this.juego);
+			this.ju3.asignarFicha();
+			this.juego.setTurno(this.ju1);
+		});		
+		
+	})
+
 	describe("Comprobar el funcionamiento de la casilla Oca",function(){
 		var ju1;
 		var ju2;
