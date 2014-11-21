@@ -84,20 +84,6 @@ function LaOca(tablero, coleccionFichas,numeroJugadores){
 		var siguienteIndice=(indice+1)%(this.coleccionJugadores.length);
 		return this.coleccionJugadores[siguienteIndice];
 	}
-	this.cambiarTurno=function(jugador){
-
-		// var indice;
-		// var siguienteIndice;
-		// indice=this.coleccionJugadores.indexOf(jugador);
-		// siguienteIndice=(indice+1)%(this.coleccionJugadores.length);
-		// if (this.coleccionJugadores[siguienteIndice].estado.esVivo()){
-		// 	this.setTurno(this.coleccionJugadores[siguienteIndice]);
-		// 	jugador.turno=new NoMeToca();
-		// }
-		// else{
-		// 	this.coleccionJugadores[siguienteIndice].pasar();
-		// }
-	}
 	this.iniciarJuego=function(){
 		this.fase=new FaseInicio(this);
 	}
