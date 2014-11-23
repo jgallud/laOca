@@ -222,7 +222,7 @@ describe("El juego de la Oca...",function(){
 
 		it("La fase es Jugar, el turno lo tiene jug1",function(){
 			expect(this.juego.fase.nombre).toEqual("Jugar");
-			expect(this.ju1.turno.nombre).toMatch("MeToca");
+			expect(this.ju1.turno.nombre).toEqual("MeToca");
 		});
 
 		it("jug1 cae en casilla 6 y pasa a la 12 y mantiene el turno",function(){

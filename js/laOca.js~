@@ -25,10 +25,10 @@ function CasillasFactory(){
 		return new Casilla(posicion,new Oca(siguiente), tablero);
 	}
 	this.crearCasillaPuente=function(posicion,siguiente, tablero){
-		return new Casilla(posicion, new Puente(siguiente), tablero);
+		return new Casilla(posicion, new Puente(siguiente, tablero));
 	}
 	this.crearCasillaDados=function(posicion,siguiente, tablero){
-		return new Casilla(posicion, new Dados(siguiente), tablero);
+		return new Casilla(posicion, new Dados(siguiente, tablero));
 	}
 	this.crearCasillaLaberinto=function(posicion, tablero){
 		return new Casilla(posicion,new Laberinto(), tablero);
