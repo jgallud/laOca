@@ -1,12 +1,10 @@
 
-function LaOcaFactory(){
+function LaOcaFactory2Fichas(){
 	this.crearTablero=function(){
-		var tablero = new Tablero();
-		return tablero;
+		return new Tablero(new CasillasFactory());
 	}
 	this.crearFichas=function(){
-		var coleccionFichas=[new Ficha("roja"),new Ficha("azul")];
-		return coleccionFichas;
+		return [new Ficha("roja"),new Ficha("azul")];
 	}
 	this.crearJuego=function(){
 		return new LaOca(this.crearTablero(),this.crearFichas(),2);
@@ -14,35 +12,35 @@ function LaOcaFactory(){
 }
 
 function CasillasFactory(){
-	this.crearCasillaNormal=function(posicion){
-		return new Casilla(posicion,new Normal());
+	this.crearCasillaNormal=function(posicion, tablero){
+		return new Casilla(posicion,new Normal(), tablero);
 	}
-	this.crearCasillaPosada=function(posicion){
-		return new Casilla(posicion,new Posada());
+	this.crearCasillaPosada=function(posicion, tablero){
+		return new Casilla(posicion,new Posada(), tablero);
 	}
-	this.crearCasillaPozo=function(posicion){
-		return new Casilla(posicion,new Pozo());
+	this.crearCasillaPozo=function(posicion, tablero){
+		return new Casilla(posicion,new Pozo(), tablero);
 	}
-	this.crearCasillaOca=function(posicion,siguiente){
-		return new Casilla(posicion,new Oca(siguiente));
+	this.crearCasillaOca=function(posicion,siguiente, tablero){
+		return new Casilla(posicion,new Oca(siguiente), tablero);
 	}
-	this.crearCasillaPuente=function(posicion,siguiente){
-		return new Casilla(posicion, new Puente(siguiente));
+	this.crearCasillaPuente=function(posicion,siguiente, tablero){
+		return new Casilla(posicion, new Puente(siguiente), tablero);
 	}
-	this.crearCasillaDados=function(posicion,siguiente){
-		return new Casilla(posicion, new Dados(siguiente));
+	this.crearCasillaDados=function(posicion,siguiente, tablero){
+		return new Casilla(posicion, new Dados(siguiente), tablero);
 	}
-	this.crearCasillaLaberinto=function(posicion){
-		return new Casilla(posicion,new Laberinto());
+	this.crearCasillaLaberinto=function(posicion, tablero){
+		return new Casilla(posicion,new Laberinto(), tablero);
 	}	
-	this.crearCasillaCarcel=function(posicion){
-		return new Casilla(posicion,new Carcel());
+	this.crearCasillaCarcel=function(posicion, tablero){
+		return new Casilla(posicion,new Carcel(), tablero);
 	}
-	this.crearCasillaCalavera=function(posicion){
-		return new Casilla(posicion,new Calavera());
+	this.crearCasillaCalavera=function(posicion, tablero){
+		return new Casilla(posicion,new Calavera(), tablero);
 	}
-	this.crearCasillaFin=function(posicion){
-		return new Casilla(posicion, new Fin());
+	this.crearCasillaFin=function(posicion, tablero){
+		return new Casilla(posicion, new Fin(), tablero);
 	}
 }
 
@@ -140,44 +138,39 @@ function FaseFin(juego){
 	}
 }
 
-function Tablero(){
+function Tablero(casillasFactory){
 	this.casillas=[];
+	this.casillasFactory = casillasFactory;
 	this.iniciarNormal=function(){
 		for(i=0;i<=63;i++){
-			this.casillas[i]=casillasFactory.crearCasillaNormal(i);			
-		}
-	};
-
-	this.iniciarTablero=function(){		
-		for(i=0;i<=63;i++){			
-			this.casillas[i].asignarTablero(this);
+			this.casillas[i]=this.casillasFactory.crearCasillaNormal(i,this);			
 		}
 	};
 
 	this.configurarTablero=function(){
-		this.casillas[6] = casillasFactory.crearCasillaPuente(6,12);
-		this.casillas[12] = casillasFactory.crearCasillaPuente(12,6);		
-		this.casillas[19] = casillasFactory.crearCasillaPosada(19);
-		this.casillas[31] = casillasFactory.crearCasillaPozo(31);
-		this.casillas[26] = casillasFactory.crearCasillaDados(26,53);
-		this.casillas[53] = casillasFactory.crearCasillaDados(53,26);		
-		this.casillas[42] = casillasFactory.crearCasillaLaberinto(42);
-		this.casillas[52] = casillasFactory.crearCasillaCarcel(52);
-		this.casillas[58] = casillasFactory.crearCasillaCalavera(58);
-		this.casillas[5] = casillasFactory.crearCasillaOca(5,9);
-		this.casillas[9] = casillasFactory.crearCasillaOca(9,14);
-		this.casillas[14] = casillasFactory.crearCasillaOca(14,18);				
-		this.casillas[18] = casillasFactory.crearCasillaOca(18,23);		
-		this.casillas[23] = casillasFactory.crearCasillaOca(23,27);		
-		this.casillas[27] = casillasFactory.crearCasillaOca(27,32);
-		this.casillas[32] = casillasFactory.crearCasillaOca(32,36);
-		this.casillas[36] = casillasFactory.crearCasillaOca(36,41);
-		this.casillas[41] = casillasFactory.crearCasillaOca(41,45);
-		this.casillas[45] = casillasFactory.crearCasillaOca(45,50);
-		this.casillas[50] = casillasFactory.crearCasillaOca(50,54);
-		this.casillas[54] = casillasFactory.crearCasillaOca(54,59);
-		this.casillas[59] = casillasFactory.crearCasillaOca(59,63);
-		this.casillas[63] = casillasFactory.crearCasillaFin(63);				
+		this.casillas[6] = this.casillasFactory.crearCasillaPuente(6,12,this);
+		this.casillas[12] = this.casillasFactory.crearCasillaPuente(12,6,this);		
+		this.casillas[19] = this.casillasFactory.crearCasillaPosada(19,this);
+		this.casillas[31] = this.casillasFactory.crearCasillaPozo(31,this);
+		this.casillas[26] = this.casillasFactory.crearCasillaDados(26,53,this);
+		this.casillas[53] = this.casillasFactory.crearCasillaDados(53,26,this);		
+		this.casillas[42] = this.casillasFactory.crearCasillaLaberinto(42,this);
+		this.casillas[52] = this.casillasFactory.crearCasillaCarcel(52,this);
+		this.casillas[58] = this.casillasFactory.crearCasillaCalavera(58,this);
+		this.casillas[5] = this.casillasFactory.crearCasillaOca(5,9,this);
+		this.casillas[9] = this.casillasFactory.crearCasillaOca(9,14,this);
+		this.casillas[14] = this.casillasFactory.crearCasillaOca(14,18,this);				
+		this.casillas[18] = this.casillasFactory.crearCasillaOca(18,23,this);		
+		this.casillas[23] = this.casillasFactory.crearCasillaOca(23,27,this);		
+		this.casillas[27] = this.casillasFactory.crearCasillaOca(27,32,this);
+		this.casillas[32] = this.casillasFactory.crearCasillaOca(32,36,this);
+		this.casillas[36] = this.casillasFactory.crearCasillaOca(36,41,this);
+		this.casillas[41] = this.casillasFactory.crearCasillaOca(41,45,this);
+		this.casillas[45] = this.casillasFactory.crearCasillaOca(45,50,this);
+		this.casillas[50] = this.casillasFactory.crearCasillaOca(50,54,this);
+		this.casillas[54] = this.casillasFactory.crearCasillaOca(54,59,this);
+		this.casillas[59] = this.casillasFactory.crearCasillaOca(59,63,this);
+		this.casillas[63] = this.casillasFactory.crearCasillaFin(63,this);				
 	}
 
 	this.moverSinCaer=function(ficha,posicion){
@@ -200,17 +193,14 @@ function Tablero(){
 		var nuevaPosicion = this.desplazar(ficha,posicion);
 		ficha.cae(this.casillas[nuevaPosicion]);
 	}
-
-	casillasFactory=new CasillasFactory();
 	this.iniciarNormal();
 	this.configurarTablero();
-	this.iniciarTablero();
 }
 
-function Casilla(posicion, tema){
+function Casilla(posicion, tema, tablero){
 	this.posicion=posicion;
 	this.tema=tema;
-	this.tablero=undefined;
+	this.tablero= tablero;
 	this.moverSinCaer=function(ficha,posicion){
 		this.tablero.moverSinCaer(ficha,posicion);
 	}

@@ -7,7 +7,7 @@ describe("El juego de la Oca...",function(){
 
 	describe("En cuanto a la inicialización",function(){
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 		});
 
 		it("...la variable juego debe estar definida",function(){
@@ -54,7 +54,7 @@ describe("El juego de la Oca...",function(){
 
 	describe("Comprobar el tablero...",function(){
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 		});
 
 		it("...las casillas 6 y 12 tienen Puente",function(){
@@ -104,7 +104,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -210,7 +210,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -244,7 +244,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -291,7 +291,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -325,7 +325,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -376,7 +376,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -423,7 +423,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -472,7 +472,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -500,7 +500,7 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
