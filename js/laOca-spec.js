@@ -7,7 +7,8 @@ describe("El juego de la Oca...",function(){
 
 	describe("En cuanto a la inicialización",function(){
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 		});
 
 		it("...la variable juego debe estar definida",function(){
@@ -54,7 +55,8 @@ describe("El juego de la Oca...",function(){
 
 	describe("Comprobar el tablero...",function(){
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];		
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 		});
 
 		it("...las casillas 6 y 12 tienen Puente",function(){
@@ -103,23 +105,51 @@ describe("El juego de la Oca...",function(){
 	describe("Comprobamos el funcionamiento de los turnos con tres jugadores",function(){
 		var ju1,ju2,ju3;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul","verde"];			
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
 			this.ju2.asignarFicha();
 			this.ju3=new Jugador("Lola",this.juego);
 			this.ju3.asignarFicha();
-			this.juego.setTurno(this.ju1);
 		});		
-		
+
+		it("El turno lo tiene jug1, cae en una casilla normal y pasa el turno a jug2",function(){
+			this.juego.setTurno(this.ju1);
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(1);
+			this.ju1.ficha.mover(1);
+			expect(this.ju1.ficha.casilla.posicion).toEqual(2);
+			expect(this.ju1.turno.nombre).toMatch("NoMeToca");
+			expect(this.ju3.turno.nombre).toMatch("NoMeToca");			
+			expect(this.ju2.turno.nombre).toMatch("MeToca");			
+		});
+		it("El turno lo tiene jug2, cae en una casilla normal y pasa el turno a jug3",function(){
+			this.juego.setTurno(this.ju2);
+			this.ju2.ficha.casilla=this.juego.tablero.getCasilla(1);
+			this.ju2.ficha.mover(1);
+			expect(this.ju2.ficha.casilla.posicion).toEqual(2);
+			expect(this.ju2.turno.nombre).toMatch("NoMeToca");
+			expect(this.ju1.turno.nombre).toMatch("NoMeToca");			
+			expect(this.ju3.turno.nombre).toMatch("MeToca");			
+		});		
+		it("El turno lo tiene jug3, cae en una casilla normal y pasa el turno a jug1",function(){
+			this.juego.setTurno(this.ju3);
+			this.ju3.ficha.casilla=this.juego.tablero.getCasilla(1);
+			this.ju3.ficha.mover(1);
+			expect(this.ju3.ficha.casilla.posicion).toEqual(2);
+			expect(this.ju3.turno.nombre).toMatch("NoMeToca");
+			expect(this.ju2.turno.nombre).toMatch("NoMeToca");			
+			expect(this.ju1.turno.nombre).toMatch("MeToca");			
+		});		
 	})
 
 	describe("Comprobar el funcionamiento de la casilla Oca",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -225,7 +255,8 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -259,7 +290,8 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];			
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -306,7 +338,8 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];			
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -340,7 +373,8 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];			
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -391,7 +425,8 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -438,7 +473,8 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];			
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -487,7 +523,8 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];			
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
@@ -515,7 +552,8 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
-			this.juego = (new LaOcaFactory()).crearJuego();
+			colores=["rojo","azul"];
+			this.juego = (new LaOcaFactory(colores)).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
 			this.ju2=new Jugador("Luis",this.juego);
