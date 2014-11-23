@@ -3,11 +3,15 @@ describe("El juego de la Oca...",function(){
 	var juego;
 	var coleccionFichas;
 	var tablero;
-	var jugador; 
+	var jugador;
 
 	describe("En cuanto a la inicialización",function(){
 		beforeEach(function(){
+<<<<<<< HEAD
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
+=======
 			this.juego = (new LaOcaFactory()).crearJuego();
+>>>>>>> upstream/master
 		});
 
 		it("...la variable juego debe estar definida",function(){
@@ -26,7 +30,11 @@ describe("El juego de la Oca...",function(){
 			expect(this.juego.coleccionFichas).toBeDefined();
 		});
 
+<<<<<<< HEAD
+		it("...la coleccion de fichas debe tener 3 fichas",function(){
+=======
 		it("...la coleccion de fichas debe tener 2 fichas",function(){
+>>>>>>> upstream/master
 			expect(this.juego.coleccionFichas.length).toEqual(2);
 		});
 
@@ -54,7 +62,11 @@ describe("El juego de la Oca...",function(){
 
 	describe("Comprobar el tablero...",function(){
 		beforeEach(function(){
+<<<<<<< HEAD
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
+=======
 			this.juego = (new LaOcaFactory()).crearJuego();
+>>>>>>> upstream/master
 		});
 
 		it("...las casillas 6 y 12 tienen Puente",function(){
@@ -63,7 +75,11 @@ describe("El juego de la Oca...",function(){
 		});
 
 		it("...la casilla 19 tiene una Posada",function(){
+<<<<<<< HEAD
+			expect(this.juego.tablero.casillas[19].tema.titulo).toEqual("Posada");
+=======
 			expect(this.juego.tablero.casillas[19].tema.titulo).toEqual("Posada");			
+>>>>>>> upstream/master
 		});
 
 		it("...las casillas 26 y 53 tiene Dados",function(){
@@ -83,7 +99,11 @@ describe("El juego de la Oca...",function(){
 			expect(this.juego.tablero.casillas[58].tema.titulo).toEqual("Calavera");
 		});
 
+<<<<<<< HEAD
+		it("...las casillas 5,9,14,18,23,27,32... tienen Oca",function(){
+=======
 		it("...las casillas 5,9,14,18,23,27,32,36,41,45,50,54 y 59 tienen Oca",function(){
+>>>>>>> upstream/master
 			expect(this.juego.tablero.casillas[5].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[9].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[14].tema.titulo).toEqual("Oca");
@@ -91,12 +111,16 @@ describe("El juego de la Oca...",function(){
 			expect(this.juego.tablero.casillas[23].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[27].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[32].tema.titulo).toEqual("Oca");
+<<<<<<< HEAD
+			//faltan casillas (completar)
+=======
 			expect(this.juego.tablero.casillas[36].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[41].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[45].tema.titulo).toEqual("Oca");
 			expect(this.juego.tablero.casillas[50].tema.titulo).toEqual("Oca");			
 			expect(this.juego.tablero.casillas[54].tema.titulo).toEqual("Oca");		
 			expect(this.juego.tablero.casillas[59].tema.titulo).toEqual("Oca");	
+>>>>>>> upstream/master
 		})
 	});
 
@@ -104,6 +128,9 @@ describe("El juego de la Oca...",function(){
 		var ju1;
 		var ju2;
 		beforeEach(function(){
+<<<<<<< HEAD
+			this.juego = (new LaOcaFactory2Fichas()).crearJuego();
+=======
 			this.juego = (new LaOcaFactory()).crearJuego();
 			this.ju1=new Jugador("Pepe",this.juego);
 			this.ju1.asignarFicha();
@@ -299,6 +326,7 @@ describe("El juego de la Oca...",function(){
 		//	this.ju1.siguienteJugador(this.ju2);
 		//	this.ju2.siguienteJugador(this.ju1);
 			this.juego.setTurno(this.ju1);
+>>>>>>> upstream/master
 		});
 
 		it("La fase es Jugar, el turno lo tiene jug1",function(){
@@ -487,6 +515,9 @@ describe("El juego de la Oca...",function(){
 			expect(this.ju1.turno.nombre).toMatch("MeToca");
 		});
 
+<<<<<<< HEAD
+})
+=======
 		it("jug1 cae en casilla 58 pierde y vuelve a la 1",function(){
 			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(57);
 			this.ju1.ficha.mover(1);
@@ -523,3 +554,4 @@ describe("El juego de la Oca...",function(){
 		});					
 	})
 })
+>>>>>>> upstream/master
