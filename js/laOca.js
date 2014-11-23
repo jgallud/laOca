@@ -20,8 +20,16 @@ function CasillasFactory() {
 	this.crearCasillaOca = function (posicion, siguiente, tablero) {
 		return new Casilla(posicion, new Oca(siguiente), tablero);
 	}
+<<<<<<< HEAD
 	this.crearCasillaPuente = function (posicion, siguiente, tablero) {
 		return new Casilla(posicion, new Puente(siguiente), tablero);
+=======
+	this.crearCasillaPozo=function(posicion){
+		return new Casilla(posicion,new Pozo());
+	}
+	this.crearCasillaOca=function(posicion,siguiente){
+		return new Casilla(posicion,new Oca(siguiente));
+>>>>>>> upstream/master
 	}
 	this.crearCasillaDados = function (posicion, siguiente, tablero) {
 		return new Casilla(posicion, new Dados(siguiente), tablero);
@@ -34,6 +42,9 @@ function CasillasFactory() {
 	}
 	this.crearCasillaCalavera = function (posicion, tablero) {
 		return new Casilla(posicion, new Calavera(), tablero);
+	}
+	this.crearCasillaFin=function(posicion){
+		return new Casilla(posicion, new Fin());
 	}
 }
 
@@ -62,6 +73,7 @@ function LaOca(tablero, coleccionFichas, numeroJugadores) {
 			console.log("Ya no quedan fichas libres");
 		}
 	};
+<<<<<<< HEAD
 	this.setTurno = function (jugador) {
 		this.turno = jugador;
 		jugador.turno = new MeToca();
@@ -71,6 +83,20 @@ function LaOca(tablero, coleccionFichas, numeroJugadores) {
 		var siguienteIndice = (indice + 1) % (this.coleccionJugadores.length);
 		this.setTurno(this.coleccionJugadores[siguienteIndice]);
 		jugador.turno = new NoMeToca();
+=======
+	this.setTurno=function(jugador){
+	//	var jugadorAnterior=this.turno;
+		jugador.turno=new MeToca();
+	//	this.turno=jugador;
+	//	if (jugadorAnterior){
+	//		jugadorAnterior.turno=new NoMeToca();
+	//	}
+	}
+	this.miSiguiente=function(jugador){
+		var indice=this.coleccionJugadores.indexOf(jugador);;
+		var siguienteIndice=(indice+1)%(this.coleccionJugadores.length);
+		return this.coleccionJugadores[siguienteIndice];
+>>>>>>> upstream/master
 	}
 	this.iniciarJuego = function () {
 		this.fase = new FaseInicio(this);
@@ -137,6 +163,7 @@ function Tablero(casillasFactory) {
 		}
 	};
 
+<<<<<<< HEAD
 	this.configurarTablero = function () {
 		this.casillas[6] = this.casillasFactory.crearCasillaPuente(6, 12, this);
 		this.casillas[12] = this.casillasFactory.crearCasillaPuente(12, 6, this);
@@ -162,6 +189,35 @@ function Tablero(casillasFactory) {
 	}
 
 	this.moverSinCaer = function (ficha, posicion) {
+=======
+	this.configurarTablero=function(){
+		this.casillas[6] = casillasFactory.crearCasillaPuente(6,12);
+		this.casillas[12] = casillasFactory.crearCasillaPuente(12,6);		
+		this.casillas[19] = casillasFactory.crearCasillaPosada(19);
+		this.casillas[31] = casillasFactory.crearCasillaPozo(31);
+		this.casillas[26] = casillasFactory.crearCasillaDados(26,53);
+		this.casillas[53] = casillasFactory.crearCasillaDados(53,26);		
+		this.casillas[42] = casillasFactory.crearCasillaLaberinto(42);
+		this.casillas[52] = casillasFactory.crearCasillaCarcel(52);
+		this.casillas[58] = casillasFactory.crearCasillaCalavera(58);
+		this.casillas[5] = casillasFactory.crearCasillaOca(5,9);
+		this.casillas[9] = casillasFactory.crearCasillaOca(9,14);
+		this.casillas[14] = casillasFactory.crearCasillaOca(14,18);				
+		this.casillas[18] = casillasFactory.crearCasillaOca(18,23);		
+		this.casillas[23] = casillasFactory.crearCasillaOca(23,27);		
+		this.casillas[27] = casillasFactory.crearCasillaOca(27,32);
+		this.casillas[32] = casillasFactory.crearCasillaOca(32,36);
+		this.casillas[36] = casillasFactory.crearCasillaOca(36,41);
+		this.casillas[41] = casillasFactory.crearCasillaOca(41,45);
+		this.casillas[45] = casillasFactory.crearCasillaOca(45,50);
+		this.casillas[50] = casillasFactory.crearCasillaOca(50,54);
+		this.casillas[54] = casillasFactory.crearCasillaOca(54,59);
+		this.casillas[59] = casillasFactory.crearCasillaOca(59,63);
+		this.casillas[63] = casillasFactory.crearCasillaFin(63);				
+	}
+
+	this.moverSinCaer=function(ficha,posicion){
+>>>>>>> upstream/master
 		ficha.nuevaCasilla(this.casillas[posicion]);
 	}
 
@@ -173,8 +229,17 @@ function Tablero(casillasFactory) {
 		return nuevaPosicion;
 	}
 
+<<<<<<< HEAD
 	this.mover = function (ficha, posicion) {
 		var nuevaPosicion = this.desplazar(ficha, posicion);
+=======
+	this.getCasilla=function(num){
+		return this.casillas[num];
+	}
+
+	this.mover=function(ficha,posicion){
+		var nuevaPosicion = this.desplazar(ficha,posicion);
+>>>>>>> upstream/master
 		ficha.cae(this.casillas[nuevaPosicion]);
 	}
 
@@ -228,10 +293,19 @@ function Oca(otraOca) {
 	}
 }
 
+<<<<<<< HEAD
 function Posada() {
 	this.titulo = "Posada";
 	this.cae = function (ficha) {
 		console.log("Caíste en la Posada");
+=======
+function Posada(){
+	this.titulo="Posada";
+	this.cae=function(ficha){
+		console.log("Caíste en la Posada y pierdes dos turnos");
+		ficha.pierdeTurno(new Pierde2Turnos());
+		ficha.cambiarTurno();
+>>>>>>> upstream/master
 	}
 }
 
@@ -245,10 +319,34 @@ function Dados(otrosDados) {
 	}
 }
 
+<<<<<<< HEAD
 function Laberinto() {
 	this.titulo = "Laberinto";
 	this.cae = function (ficha) {
+=======
+function Pozo(){
+	this.titulo="Pozo";
+	this.pozo=undefined;
+	this.cae=function(ficha){
+		if (this.pozo){
+//			this.pozo.turno=;
+			this.pozo.estado=new Vivo();
+		};
+		console.log("Caiste en el pozo");
+//		ficha.jugador.entrarPozo();	
+		this.pozo=ficha.jugador;
+		ficha.jugador.estado=new EnPozo();	
+		ficha.cambiarTurno();
+	}
+}
+
+function Laberinto(){
+	this.titulo="Laberinto";
+	this.cae=function(ficha){
+>>>>>>> upstream/master
 		console.log("Caíste en el Laberinto");
+		ficha.pierdeTurno(new Pierde2Turnos());
+		ficha.cambiarTurno();
 	}
 }
 
@@ -256,6 +354,8 @@ function Carcel() {
 	this.titulo = "Carcel";
 	this.cae = function (ficha) {
 		console.log("Caíste en la Cárcel");
+		ficha.pierdeTurno(new Pierde3Turnos());
+		ficha.cambiarTurno();
 	}
 }
 
@@ -263,13 +363,22 @@ function Calavera() {
 	this.titulo = "Calavera";
 	this.cae = function (ficha) {
 		console.log("Caíste en la Calavera");
+		ficha.moverSinCaer(0);
+		ficha.cambiarTurno();
 	}
 }
 
+<<<<<<< HEAD
 function Fin() {
 	this.titulo = "Fin";
 	this.cae = function (ficha) {
 		ficha.juego.fase = new FaseFin(ficha.juego);
+=======
+function Fin(){
+	this.titulo="Fin";
+	this.cae=function(ficha){
+		ficha.jugador.juego.fase=new FaseFin(ficha.juego);
+>>>>>>> upstream/master
 		console.log("Fin del juego");
 	}
 }
@@ -302,27 +411,123 @@ function Ficha(color) {
 	this.cambiarTurno = function () {
 		this.jugador.cambiarTurno();
 	}
+	this.pierdeTurno=function(obj){
+		this.jugador.pierdeTurno(obj);
+	}
 }
 
+<<<<<<< HEAD
 function MeToca() {
 	this.lanzar = function (jugador) {
 		var numero = Math.round(Math.random() * 5 + 1);
 		console.log("Tirada: " + numero);
+=======
+function MeToca(){
+	this.nombre="MeToca";
+	this.lanzar=function(jugador){
+		var numero=Math.round(Math.random()*5+1);
+		console.log("Tirada: "+numero);
+>>>>>>> upstream/master
 		jugador.ficha.mover(numero);
 	}
 }
 
+<<<<<<< HEAD
 function NoMeToca() {
 	this.lanzar = function (jugador) {
+=======
+function NoMeToca(){
+	this.nombre="NoMeToca";
+	this.lanzar=function(jugador){
+>>>>>>> upstream/master
 		console.log("No es tu turno");
 	}
 }
 
+<<<<<<< HEAD
 function Jugador(nombre, juego) {
 	this.nombre = nombre;
 	this.ficha = undefined;
 	this.juego = juego;
 	this.turno = new NoMeToca();
+=======
+function Vivo(){
+	this.nombre="Vivo";
+	this.esVivo=function(){
+		return true;
+	}
+	this.tomarTurno=function(jugador){
+		jugador.turno=new MeToca();
+	}
+}
+
+function EnPozo(){
+	this.nombre="EnPozo";
+	this.tomarTurno=function(){
+		
+	}
+}
+
+function PierdeNTurnos(numero){
+	this.nombre="Pierde"+numero+"Turnos";
+	this.numero=numero;
+	this.esVivo=function(){
+		return false;
+	}
+	this.tomarTurno=function(jugador){
+		console.log("Faltan "+this.numero+" turnos sin jugar");
+		jugador.estado=new PierdeNTurnos(this.numero-1);
+		jugador.cambiarTurno();
+	}
+}
+
+function Pierde3Turnos(){
+//	this.nombre="Pierde3Turnos";
+//	this.esVivo=function(){
+//		return false;
+//	}
+	this.tomarTurno=function(jugador){
+		console.log("Faltan dos turnos sin jugar");
+		jugador.estado=new Pierde2Turnos();
+		jugador.cambiarTurno();
+	}
+}
+Pierde3Turnos.prototype= new PierdeNTurnos(3);
+
+function Pierde2Turnos(){
+	//this.nombre="Pierde2Turnos";
+	//this.esVivo=function(){
+	//	return false;
+	//}
+	this.tomarTurno=function(jugador){	
+		console.log("Faltan un turno sin jugar");
+		jugador.estado=new Pierde1Turno();
+		jugador.cambiarTurno();
+	}
+}
+Pierde2Turnos.prototype=new PierdeNTurnos(2);
+
+function Pierde1Turno(){
+//	this.nombre="Pierde1Turno";
+//	this.esVivo=function(){
+//		return false;
+//	}
+	this.tomarTurno=function(jugador){
+		console.log("El siguiente ya te toca");
+		jugador.estado=new Vivo();
+		jugador.cambiarTurno();
+	}
+}
+
+Pierde1Turno.prototype=new PierdeNTurnos(1);
+
+function Jugador(nombre,juego){
+	this.nombre=nombre;
+	this.ficha=undefined;
+	this.juego=juego;
+	this.turno=new NoMeToca();
+	this.estado=new Vivo();
+>>>>>>> upstream/master
 
 	this.asignarFicha = function () {
 		this.juego.fase.asignarFicha(this);
@@ -330,8 +535,27 @@ function Jugador(nombre, juego) {
 	this.lanzar = function () {
 		this.juego.fase.lanzar(this);
 	}
+<<<<<<< HEAD
 	this.cambiarTurno = function () {
 		this.juego.cambiarTurno(this);
 	}
 
 }
+=======
+	this.cambiarTurno=function(){
+		//this.juego.cambiarTurno(this);
+		this.turno=new NoMeToca();
+		var miSiguiente=this.juego.miSiguiente(this);
+		miSiguiente.tomarTurno();
+	}
+	this.tomarTurno=function(){
+		this.estado.tomarTurno(this);
+	}
+	this.pierdeTurno=function(obj){
+		this.estado=obj;
+	}
+	// this.pasar=function(){
+	// 	this.estado.pasar(this);
+	// }
+}
+>>>>>>> upstream/master
