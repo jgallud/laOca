@@ -3,7 +3,7 @@ describe("El juego de la Oca...",function(){
 	var juego;
 	var coleccionFichas;
 	var tablero;
-	var jugador; 
+	var jugador;
 
 	describe("En cuanto a la inicialización",function(){
 		beforeEach(function(){
@@ -26,6 +26,7 @@ describe("El juego de la Oca...",function(){
 		it("...el juego tiene una coleccion de fichas", function(){
 			expect(this.juego.coleccionFichas).toBeDefined();
 		});
+
 
 		it("...la coleccion de fichas debe tener 2 fichas",function(){
 			expect(this.juego.coleccionFichas.length).toEqual(2);
@@ -65,7 +66,7 @@ describe("El juego de la Oca...",function(){
 		});
 
 		it("...la casilla 19 tiene una Posada",function(){
-			expect(this.juego.tablero.casillas[19].tema.titulo).toEqual("Posada");			
+			expect(this.juego.tablero.casillas[19].tema.titulo).toEqual("Posada");
 		});
 
 		it("...las casillas 26 y 53 tiene Dados",function(){
@@ -576,3 +577,4 @@ describe("El juego de la Oca...",function(){
 		});					
 	})
 })
+
