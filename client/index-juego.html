@@ -1,29 +1,47 @@
+<!DOCTYPE>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title>La Oca</title>
-	<script src="client/lib/jquery-min.js"></script>
-<!--	<script src="lib/jquery.cookie.js"></script> -->
-	<script src="client/lib/underscore-min.js"></script>
-	<link rel="stylesheet" href="client/css/estilos.css" />
+    <meta charset="utf-8">
+    <title>La Oca</title>
+    <script src="./lib/jquery-min.js"></script>
+    <script src="./lib/underscore-min.js"></script>
+    <link rel="stylesheet" href="./css/estilos.css" />
 </head>
+
 <body>
-	<header>
-		<h1>La Oca</h1>
-	</header>
-	<nav>
-		<div id="j1" ></div>
-		<div id="partida" ></div>
-	</nav>
-	<section>
-		<canvas id="tablero" width="550" height="550"></canvas>	
-	</section>
-	<footer>
-	Procesos de Ingeniería del Software
-	</footer>
-	<script src="client/js/cliente-juego.js"></script>
-	<script>
-		reset();
-	</script>
+    <header>
+        <h1>La Oca</h1>
+    </header>
+    <nav>
+        <div id="j1"></div>
+        <div id="partida"></div>
+    </nav>
+    <section>
+        <canvas id="tablero" width="550" height="550"></canvas>
+    </section>
+    <footer>
+        Procesos de Ingeniería del Software
+    </footer>
+    <script src="./js/cliente-juego.js"></script>
+    <script>
+        reset();
+        /*DIBUJA UN TABLERO DE 64 CASILLAS*/
+        var canvas = document.getElementById("tablero");
+        var rangosAncho = parseInt(canvas.width) / 8;
+        var rangosAlto = parseInt(canvas.height) / 8;
+        var ctx = canvas.getContext("2d");
+        for (var x = 0; x <= canvas.width; x = x + rangosAncho) {
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.width);
+        }
+        for (var y = 0; y <= canvas.height; y = y + rangosAlto) {
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.height, y);
+        }
+        ctx.strokeStyle = "#f00";
+        ctx.stroke();
+    </script>
 </body>
+
 </html>
