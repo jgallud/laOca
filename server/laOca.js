@@ -8,7 +8,6 @@ var LaOcaFactory = function(colores){
 		for(var i in colores){
 			coleccionFichas.push(new Ficha(colores[i]));
 		}
-	//	var coleccionFichas=colores;//[new Ficha("roja"),new Ficha("azul")];
 		return coleccionFichas;
 	}
 	this.crearJuego=function(){
@@ -99,18 +98,15 @@ function LaOca(tablero, coleccionFichas) {
     };
 
     this.setTurno = function (jugador) {
-        //	var jugadorAnterior=this.turno;
         jugador.turno = new MeToca();
-        //	this.turno=jugador;
-        //	if (jugadorAnterior){
-        //		jugadorAnterior.turno=new NoMeToca();
-        //	}
     }
+
     this.miSiguiente = function (jugador) {
         var indice = this.coleccionJugadores.indexOf(jugador);;
         var siguienteIndice = (indice + 1) % (this.coleccionJugadores.length);
         return this.coleccionJugadores[siguienteIndice];
     }
+
     this.iniciarJuego = function () {
         this.numeroJugadores = this.coleccionFichas.length;
         this.fase = new FaseInicio(this);
@@ -299,7 +295,6 @@ function Dados(otrosDados) {
     this.titulo = "Dados";
     this.otrosDados = otrosDados;
     this.cae = function (ficha) {
-        //mover la ficha al otro puente y decirle que tire de nuevo
         console.log("De dado a dado y tiro porque me ha tocado");
         ficha.moverSinCaer(this.otrosDados);
     }
@@ -310,11 +305,9 @@ function Pozo() {
     this.pozo = undefined;
     this.cae = function (ficha) {
         if (this.pozo) {
-            //			this.pozo.turno=;
             this.pozo.estado = new Vivo();
         };
         console.log("Caiste en el pozo");
-        //		ficha.jugador.entrarPozo();	
         this.pozo = ficha.jugador;
         ficha.jugador.estado = new EnPozo();
         ficha.cambiarTurno();
@@ -436,10 +429,6 @@ function PierdeNTurnos(numero) {
 }
 
 function Pierde3Turnos() {
-    //	this.nombre="Pierde3Turnos";
-    //	this.esVivo=function(){
-    //		return false;
-    //	}
     this.tomarTurno = function (jugador) {
         console.log("Faltan dos turnos sin jugar");
         jugador.estado = new Pierde2Turnos();
@@ -449,10 +438,6 @@ function Pierde3Turnos() {
 Pierde3Turnos.prototype = new PierdeNTurnos(3);
 
 function Pierde2Turnos() {
-    //this.nombre="Pierde2Turnos";
-    //this.esVivo=function(){
-    //	return false;
-    //}
     this.tomarTurno = function (jugador) {
         console.log("Faltan un turno sin jugar");
         jugador.estado = new Pierde1Turno();
@@ -462,10 +447,6 @@ function Pierde2Turnos() {
 Pierde2Turnos.prototype = new PierdeNTurnos(2);
 
 function Pierde1Turno() {
-    //	this.nombre="Pierde1Turno";
-    //	this.esVivo=function(){
-    //		return false;
-    //	}
     this.tomarTurno = function (jugador) {
         console.log("El siguiente ya te toca");
         jugador.estado = new Vivo();
@@ -489,7 +470,6 @@ function Jugador(nombre, juego) {
         this.juego.fase.lanzar(this);
     }
     this.cambiarTurno = function () {
-        //this.juego.cambiarTurno(this);
         this.turno = new NoMeToca();
         var miSiguiente = this.juego.miSiguiente(this);
         miSiguiente.tomarTurno();
