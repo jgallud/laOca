@@ -500,9 +500,6 @@ function Jugador(nombre, juego) {
     this.pierdeTurno = function (obj) {
         this.estado = obj;
     }
-    // this.pasar=function(){
-    // 	this.estado.pasar(this);
-    // }
 }
 
 Pierde1Turno.prototype=new PierdeNTurnos(1);
@@ -521,7 +518,6 @@ var Jugador = function(nombre,juego){
 		this.juego.fase.lanzar(this);
 	}
 	this.cambiarTurno=function(){
-		//this.juego.cambiarTurno(this);
 		this.turno=new NoMeToca();
 		var miSiguiente=this.juego.miSiguiente(this);
 		miSiguiente.tomarTurno();
@@ -532,12 +528,13 @@ var Jugador = function(nombre,juego){
 	this.pierdeTurno=function(obj){
 		this.estado=obj;
 	}
-	// this.pasar=function(){
-	// 	this.estado.pasar(this);
-	// }
+}
+
+var iniJuego = function(){
+    var colores=["rojo","azul","verde"];
+    return (new LaOcaFactory(colores)).crearJuego();
 }
 
 module.exports.Jugador = Jugador;
-module.exports.Ficha = Ficha;
-module.exports.Tablero = Tablero;
 module.exports.LaOcaFactory = LaOcaFactory;
+module.exports.iniJuego = iniJuego;

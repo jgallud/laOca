@@ -9,8 +9,6 @@ var application_root = __dirname,
 	path = require('path');
 var modulo = require('./server/laOca.js');
 var juego;
-var tablero;
-var jugador;
 
 var app=exp(); 
 
@@ -23,7 +21,7 @@ app.get("/",function(request,response){
 });
 
 app.get("/reset",function(request,response){
-	iniJuego();
+	juego = modulo.iniJuego();
 	console.log("Fase:"+juego.fase.nombre);
 	var jsonData={
 		"fase" : juego.fase.nombre
@@ -32,11 +30,5 @@ app.get("/reset",function(request,response){
 });
 
 app.listen(port,host);
+console.log("Servidor iniciado en puerto: "+port);
 
-function iniJuego(){
-	var	colores=["rojo","azul","verde"];
-	juego = (new modulo.LaOcaFactory(colores)).crearJuego();
-	//tablero = new modulo.Tablero();
-	//var coleccionFichas=[new modulo.Ficha("roja"),new modulo.Ficha("azul"),new modulo.Ficha("verde")];
-	//juego = new modulo.LaOca(tablero, coleccionFichas,2);
-}
