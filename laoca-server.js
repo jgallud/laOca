@@ -26,13 +26,7 @@ app.get("/",function(request,response){
 app.get("/reset",function(request,response){
 	juego = modulo.iniJuego();
 	console.log("Fase:"+juego.fase.nombre);
-	response.redirect("/");
-	/*
-	var jsonData={
-		"fase" : juego.fase.nombre
-	};
-	response.send(jsonData);
-	*/
+	response.send({"res":"ok"});
 });
 
 app.get("/ficha/:nombre",function(request,response){

@@ -21,3 +21,10 @@ function mostrarColor(color){
 	$('#pedir').remove();
 	$('#j1').append("Ficha: "+color);
 }
+
+function reset(){
+	$.getJSON(url+"reset",function(data){
+		window.location.reload();
+	})
+}
+
