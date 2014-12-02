@@ -27,12 +27,12 @@ function hayJugadores(){
 }
 
 function turno(){
-	$.getJSON(url+color,function(data){
+	$.getJSON(url+"turno/"+color,function(data){
 		if (data.res=="MeToca"){
-			//mostrarLanzar()
+			$('#j1').append("<p>Turno: "+data.turnoº+"</p>")
 		}
 		else{
-			//mostrarNoEsTuTurno()
+			$('#j1').append("<p>Turno: "+data.turno+"</p>")
 		}
 	})
 }

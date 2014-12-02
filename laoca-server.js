@@ -40,8 +40,8 @@ app.get("/hayJugadores",function(req,res){
 	res.send(jsonData);
 });
 
-app.get("/empezar/:color",function(req,res){
-	var jugador = juego.buscarJugador(color);
+app.get("/turno/:color",function(req,res){
+	var jugador = juego.buscarJugador(req.params.color);
 	var jsonData;
 	if (jugador){
 		jsonData={"turno":jugador.turno.nombre}

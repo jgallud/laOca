@@ -136,6 +136,7 @@ function FaseInicio(juego) {
             this.juego.coleccionJugadores.push(jugador);
             if (this.juego.coleccionJugadores.length == this.juego.coleccionFichas.length) {
                 this.juego.fase = new FaseJugar(juego);
+                this.juego.setTurno(this.juego.coleccionJugadores[0]);
             }
         }
     }
