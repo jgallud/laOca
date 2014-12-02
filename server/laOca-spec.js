@@ -116,7 +116,7 @@ describe("El juego de la Oca...",function(){
 		});		
 
 		it("El turno lo tiene jug1, cae en una casilla normal y pasa el turno a jug2",function(){
-			this.juego.setTurno(this.ju1);
+			//this.juego.setTurno(this.ju1);
 			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(1);
 			this.ju1.ficha.mover(1);
 			expect(this.ju1.ficha.casilla.posicion).toEqual(2);
@@ -125,7 +125,9 @@ describe("El juego de la Oca...",function(){
 			expect(this.ju2.turno.nombre).toMatch("MeToca");			
 		});
 		it("El turno lo tiene jug2, cae en una casilla normal y pasa el turno a jug3",function(){
-			this.juego.setTurno(this.ju2);
+			//this.juego.setTurno(this.ju2);
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(1);
+			this.ju1.ficha.mover(1);
 			this.ju2.ficha.casilla=this.juego.tablero.getCasilla(1);
 			this.ju2.ficha.mover(1);
 			expect(this.ju2.ficha.casilla.posicion).toEqual(2);
@@ -134,7 +136,11 @@ describe("El juego de la Oca...",function(){
 			expect(this.ju3.turno.nombre).toMatch("MeToca");			
 		});		
 		it("El turno lo tiene jug3, cae en una casilla normal y pasa el turno a jug1",function(){
-			this.juego.setTurno(this.ju3);
+			//this.juego.setTurno(this.ju3);
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(1);
+			this.ju1.ficha.mover(1);
+			this.ju2.ficha.casilla=this.juego.tablero.getCasilla(1);
+			this.ju2.ficha.mover(1);
 			this.ju3.ficha.casilla=this.juego.tablero.getCasilla(1);
 			this.ju3.ficha.mover(1);
 			expect(this.ju3.ficha.casilla.posicion).toEqual(2);
