@@ -1,10 +1,39 @@
 var url = "http://127.0.0.1:1337/";
+var intervaloInicio;
+var color;
 
 //Funciones de comunicación con el API REST
 
 function ficha(nombre){
 	$.getJSON(url+'ficha/'+nombre,function(data){
+		color=data.color;
 		mostrarColor(data.color);
+	})
+}
+
+function reset(){
+	$.getJSON(url+"reset",function(data){
+		window.location.reload();
+	})
+}
+
+function hayJugadores(){
+	$.getJSON(url+"hayJugadores",function(data){
+		if (data.res=="ok"){
+			clearInterval(intervaloInicio);
+			mostrarBotonEmpezar();
+		}
+	})
+}
+
+function turno(){
+	$.getJSON(url+color,function(data){
+		if (data.res=="MeToca"){
+			//mostrarLanzar()
+		}
+		else{
+			//mostrarNoEsTuTurno()
+		}
 	})
 }
 
@@ -20,11 +49,14 @@ function pedirFicha(){
 function mostrarColor(color){
 	$('#pedir').remove();
 	$('#j1').append("Ficha: "+color);
+	intervaloInicio = setInterval("hayJugadores()", 3000);
 }
 
-function reset(){
-	$.getJSON(url+"reset",function(data){
-		window.location.reload();
+function mostrarBotonEmpezar(){
+	$('#j1').append("<p id='emp'><button id='empezar'>A jugar!</button></p>");
+	$('#empezar').on("click",function(){
+		$('#emp').remove();
+		turno();
 	})
-}
 
+}

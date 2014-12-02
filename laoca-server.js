@@ -29,6 +29,45 @@ app.get("/reset",function(request,response){
 	response.send({"res":"ok"});
 });
 
+app.get("/hayJugadores",function(req,res){
+	var jsonData;
+	if (juego.coleccionJugadores.length==juego.coleccionFichas.length){
+		jsonData={"res":"ok"};
+	}
+	else{
+		jsonData={"res":"nook"};
+	}
+	res.send(jsonData);
+});
+
+app.get("/empezar/:color",function(req,res){
+	var jugador = juego.buscarJugador(color);
+	var jsonData;
+	if (jugador){
+		jsonData={"turno":jugador.turno.nombre}
+	}
+	else{
+		jsonData={"turno":"fallo"}
+	}
+	res.send(jsonData);
+})
+
+app.get("/lanzar/:color",function(res,req){
+	var jugador = juego.buscarJugador(color);
+	var jsonData;
+	if (jugador){
+		jugador.lanzar();
+		jsonData={
+			"posicion":juego.ficha.casilla.posicion,
+			"estado" : juego.estado.nombre
+		}
+	}
+	else{
+		jsonData={"res":"error"}
+	}
+	res.send(jsonData);
+});
+
 app.get("/ficha/:nombre",function(request,response){
 	jugador = new modulo.Jugador(request.params.nombre,juego);
 	jugador.asignarFicha();

@@ -1,3 +1,5 @@
+var _ = require("underscore");
+
 var LaOcaFactory = function(colores){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
@@ -110,6 +112,12 @@ function LaOca(tablero, coleccionFichas) {
     this.iniciarJuego = function () {
         this.numeroJugadores = this.coleccionFichas.length;
         this.fase = new FaseInicio(this);
+    }
+
+    this.buscarJugador=function(color){
+        var jug=_.find(this.coleccionJugadores,function(f){
+                return f.ficha.color==color});
+        return jug;
     }
 
     this.iniciarJuego();
@@ -511,7 +519,7 @@ var Jugador = function(nombre,juego){
 }
 
 var iniJuego = function(){
-    var colores=["rojo","azul","verde"];
+    var colores=["rojo","azul"];
     return (new LaOcaFactory(colores)).crearJuego();
 }
 
