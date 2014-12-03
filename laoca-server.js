@@ -9,8 +9,10 @@ var application_root = __dirname,
 	path = require('path');
 var modulo = require('./server/laOca.js');
 var juego;
-
 var app=exp(); 
+var http = require('http');
+var server=http.createServer(app);
+var io = require("socket.io");
 
 app.use('/',exp.static(__dirname));
 
@@ -83,6 +85,18 @@ app.get("/ficha/:nombre",function(request,response){
     }
 })
 
-app.listen(port,host);
+//app.listen(port,host);
+server.listen(port,host);
 console.log("Servidor iniciado en puerto: "+port);
+
+var socket = io.listen(server);
+var coleccion =[];
+socket.on('connection',function(client){
+	client.on('listo',function(data){
+		coleccion.push(data);
+		if (coleccion.length==juego.coleccionFichas.length){
+			socket.emit("go",{juego:"ok"});
+		}
+	})
+})
 

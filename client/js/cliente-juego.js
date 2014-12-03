@@ -1,6 +1,16 @@
 var url = "http://127.0.0.1:1337/";
 var intervaloInicio;
 var color;
+var socket = io(url);
+
+//Sockets
+function esperarAlResto(){
+	socket.on('go',function(){
+		mostrarBotonEmpezar();
+	})
+}
+
+
 
 //Funciones de comunicación con el API REST
 
@@ -49,7 +59,11 @@ function pedirFicha(){
 function mostrarColor(color){
 	$('#pedir').remove();
 	$('#j1').append("Ficha: "+color);
-	intervaloInicio = setInterval("hayJugadores()", 3000);
+	//Sockets
+	socket.emit('listo',color);
+	esperarAlResto();
+	//Pooling
+	//intervaloInicio = setInterval("hayJugadores()", 3000);
 }
 
 function mostrarBotonEmpezar(){
