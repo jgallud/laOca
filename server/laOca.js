@@ -1,3 +1,5 @@
+var _ = require("underscore");
+
 var LaOcaFactory = function(colores){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
@@ -112,6 +114,12 @@ function LaOca(tablero, coleccionFichas) {
         this.fase = new FaseInicio(this);
     }
 
+    this.buscarJugador=function(color){
+        var jug=_.find(this.coleccionJugadores,function(f){
+                return f.ficha.color==color});
+        return jug;
+    }
+
     this.iniciarJuego();
 }
 
@@ -128,6 +136,7 @@ function FaseInicio(juego) {
             this.juego.coleccionJugadores.push(jugador);
             if (this.juego.coleccionJugadores.length == this.juego.coleccionFichas.length) {
                 this.juego.fase = new FaseJugar(juego);
+                this.juego.setTurno(this.juego.coleccionJugadores[0]);
             }
         }
     }
@@ -516,7 +525,7 @@ var Jugador = function(nombre,juego){
 }
 
 var iniJuego = function(){
-    var colores=["rojo","azul","verde"];
+    var colores=["rojo","azul"];
     return (new LaOcaFactory(colores)).crearJuego();
 }
 

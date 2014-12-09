@@ -9,8 +9,10 @@ var application_root = __dirname,
 	path = require('path');
 var modulo = require('./server/laOca.js');
 var juego;
-
 var app=exp(); 
+var http = require('http');
+var server=http.createServer(app);
+var io = require("socket.io");
 
 app.use('/',exp.static(__dirname));
 
@@ -26,13 +28,46 @@ app.get("/",function(request,response){
 app.get("/reset",function(request,response){
 	juego = modulo.iniJuego();
 	console.log("Fase:"+juego.fase.nombre);
-	response.redirect("/");
-	/*
-	var jsonData={
-		"fase" : juego.fase.nombre
-	};
-	response.send(jsonData);
-	*/
+	response.send({"res":"ok"});
+});
+
+app.get("/hayJugadores",function(req,res){
+	var jsonData;
+	if (juego.coleccionJugadores.length==juego.coleccionFichas.length){
+		jsonData={"res":"ok"};
+	}
+	else{
+		jsonData={"res":"nook"};
+	}
+	res.send(jsonData);
+});
+
+app.get("/turno/:color",function(req,res){
+	var jugador = juego.buscarJugador(req.params.color);
+	var jsonData;
+	if (jugador){
+		jsonData={"turno":jugador.turno.nombre}
+	}
+	else{
+		jsonData={"turno":"fallo"}
+	}
+	res.send(jsonData);
+})
+
+app.get("/lanzar/:color",function(res,req){
+	var jugador = juego.buscarJugador(color);
+	var jsonData;
+	if (jugador){
+		jugador.lanzar();
+		jsonData={
+			"posicion":juego.ficha.casilla.posicion,
+			"estado" : juego.estado.nombre
+		}
+	}
+	else{
+		jsonData={"res":"error"}
+	}
+	res.send(jsonData);
 });
 
 app.get("/ficha/:nombre",function(request,response){
@@ -50,6 +85,18 @@ app.get("/ficha/:nombre",function(request,response){
     }
 })
 
-app.listen(port,host);
+//app.listen(port,host);
+server.listen(port,host);
 console.log("Servidor iniciado en puerto: "+port);
+
+var socket = io.listen(server);
+var coleccion =[];
+socket.on('connection',function(client){
+	client.on('listo',function(data){
+		coleccion.push(data);
+		if (coleccion.length==juego.coleccionFichas.length){
+			socket.emit("go",{juego:"ok"});
+		}
+	})
+})
 

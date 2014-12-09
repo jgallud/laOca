@@ -5,6 +5,7 @@
 	<script src="client/lib/jquery-min.js"></script>
 <!--	<script src="lib/jquery.cookie.js"></script> -->
 	<script src="client/lib/underscore-min.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<link rel="stylesheet" href="client/css/estilos.css" />
 </head>
 <body>
@@ -16,6 +17,7 @@
 			<p id="pedir">
 				Nombre: <input type="text" id="nombre" /> <button id="pedirBtn">Pedir Ficha</button>
 			</p>
+			<p id="reinicio"><button id="reset" onclick="reset()">Reiniciar Juego</button></p>
 		</div>
 		<div id="partida" ></div>
 	</nav>

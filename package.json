@@ -1,0 +1,28 @@
+{
+  "name": "laOca",
+  "version": "0.0.0",
+  "description": "Juego de La Oca",
+  "main": "laoca-server.js",
+  "dependencies": {
+    "express": "~4.9.6",
+    "fs": "~0.0.2",
+    "jasmine-node": "~1.14.5",
+    "socket.io": "~1.2.1",
+    "underscore": "~1.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jgallud/laOca.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "socketio",
+    "jasmine"
+  ],
+  "author": "Jose A. G.",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/jgallud/laOca/issues"
+  }
+}

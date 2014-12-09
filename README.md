@@ -1,9 +1,9 @@
 Juego de La Oca
 ===============
 
-Diseño, Implementación y Pruebas del juego de La Oca.
+Diseño, Implementación y Pruebas del juego de La Oca (versión de clase).
 
-Asignatura de Procesos de Ingeniería del Software
+Para instalar utilizar npm install
 
 Para pasar las pruebas (laOca-spec.js) hay que hacer lo siguiente:
 - Instalar Jasmine para NodeJS: npm install jasmine -g
