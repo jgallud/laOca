@@ -278,7 +278,12 @@ function Oca(otraOca) {
     this.otraOca = otraOca;
     this.cae = function (ficha) {
         console.log("De Oca a Oca y tiro porque me toca");
-        ficha.moverSinCaer(this.otraOca);
+        if (ficha.casilla.posicion==59){
+            ficha.mover(4);
+        }
+        else{
+            ficha.moverSinCaer(this.otraOca);            
+        }
     }
 }
 
