@@ -1,5 +1,11 @@
 var _ = require("underscore");
 
+function Dado() {}
+Dado.nombre = "Dado de 6 caras";
+Dado.tirar = function () {
+    return Math.round(Math.random() * 5 + 1);
+};
+
 var LaOcaFactory = function(colores){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
@@ -399,7 +405,7 @@ var Ficha = function(color){
 function MeToca() {
     this.nombre = "MeToca";
     this.lanzar = function (jugador) {
-        var numero = Math.round(Math.random() * 5 + 1);
+        var numero = Dado.tirar();
         console.log("Tirada: " + numero);
         jugador.ficha.mover(numero);
     }
