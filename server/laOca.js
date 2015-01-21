@@ -84,13 +84,13 @@ function CasillasFactory() {
     }
 }
 
-function LaOca(tablero, coleccionFichas) {
+function LaOca(tablero, coleccionFichas, numRequeridoJugadores) {
     this.tablero = tablero;
     this.coleccionFichas = coleccionFichas;
     this.coleccionJugadores = [];
     this.turno = undefined;
     this.fase = undefined;
-    this.numeroJugadores = undefined;
+    this.numeroJugadores = numRequeridoJugadores;
 
     this.asignarFicha = function (jugador) {
         this.fase.asignarFicha(jugador);
