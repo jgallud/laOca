@@ -2,34 +2,36 @@
 <head>
 	<meta charset="utf-8">
 	<title>La Oca</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="client/lib/jquery-min.js"></script>
-<!--	<script src="lib/jquery.cookie.js"></script> -->
+	<script src="client/lib/jquery.cookie.js"></script>
 	<script src="client/lib/underscore-min.js"></script>
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-	<link rel="stylesheet" href="client/css/estilos.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 </head>
-<body>
-	<header>
+<body>	
+	<div class="container">
 		<h1>La Oca</h1>
-	</header>
-	<nav>
-		<div id="j1" >
-			<p id="pedir">
-				Nombre: <input type="text" id="nombre" /> <button id="pedirBtn">Pedir Ficha</button>
-			</p>
-			<p id="reinicio"><button id="reset" onclick="reset()">Reiniciar Juego</button></p>
+  		<div class="row">
+    		<div class="col-sm-4">
+				<div id="j1" ></div>
+				<div id="lista"><h3>Lista de Partidas:</h3></div>
+				<div id="partida" ></div>
+				<div id="zonaDados"></div>
+				<div id="botonTirar"></div>		
+			</div>
+	    	<div class="col-sm-8" id="canvas">
+				<canvas id="tablero" width="550" height="550"></canvas>			
+			</div>
 		</div>
-		<div id="partida" ></div>
-	</nav>
-	<section>
-		<canvas id="tablero" width="550" height="300"></canvas>	
-	</section>
-	<footer>
-	Procesos de Ingeniería del Software
-	</footer>
-	<script src="client/js/cliente-juego.js"></script>
+	</div>
+	<script src="client/js/tablero.js"></script>		
+	<script src="client/js/laOca-client.js"></script>
 	<script>
-		pedirFicha();
+		//cargarTablero();
+		//configurar();
+		crearUnirse();
 	</script>
 </body>
 </html>
