@@ -260,11 +260,16 @@ describe("El juego de la Oca...",function(){
 				expect(this.ju1.ficha.casilla.posicion).toEqual(59);
 				expect(this.ju1.turno.nombre).toMatch("MeToca");
 		});	
+<<<<<<< HEAD
 		it("jug1 cae en casilla 59 y pasa a la 63 y mantiene el turno",function(){
 			this.ju1.ficha.casilla=this.partida.tablero.getCasilla(58);
+=======
+		it("jug1 cae en casilla 59 y pasa a la 63 y termina el juego",function(){
+			this.ju1.ficha.casilla=this.juego.tablero.getCasilla(58);
+>>>>>>> 0f2abb40384488379e44fb25f26f8a0fe83aef1a
 			this.ju1.ficha.mover(1);
 			expect(this.ju1.ficha.casilla.posicion).toEqual(63);
-			expect(this.ju1.turno.nombre).toMatch("MeToca");
+			expect(this.juego.fase.nombre).toEqual("Fin");
 		});
 	});
 

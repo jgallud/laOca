@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+var _ = require("underscore");
+
+function Dado() {}
+Dado.nombre = "Dado de 6 caras";
+Dado.tirar = function () {
+    return Math.round(Math.random() * 5 + 1);
+};
+
+>>>>>>> 0f2abb40384488379e44fb25f26f8a0fe83aef1a
 var LaOcaFactory = function(colores){
 	this.crearTablero=function(){
 		var tablero = new Tablero();
@@ -413,6 +424,108 @@ function Casilla(posicion, tema) {
     }
 }
 
+<<<<<<< HEAD
+=======
+function Normal() {
+    this.titulo = "Normal";
+    this.cae = function (ficha) {
+        console.log("Casilla normal");
+        ficha.cambiarTurno();
+    }
+}
+
+function Puente(otroPuente) {
+    this.titulo = "Puente";
+    this.otroPuente = otroPuente;
+    this.cae = function (ficha) {
+        //mover la ficha al otro puente y decirle que tire de nuevo
+        console.log("De puente a puente y tiro porque me lleva la corriente");
+        ficha.moverSinCaer(this.otroPuente);
+    }
+}
+
+function Oca(otraOca) {
+    this.titulo = "Oca";
+    this.otraOca = otraOca;
+    this.cae = function (ficha) {
+        console.log("De Oca a Oca y tiro porque me toca");
+        if (ficha.casilla.posicion==59){
+            ficha.mover(4);
+        }
+        else{
+            ficha.moverSinCaer(this.otraOca);            
+        }
+    }
+}
+
+function Posada() {
+    this.titulo = "Posada";
+    this.cae = function (ficha) {
+        console.log("Caíste en la Posada y pierdes dos turnos");
+        ficha.pierdeTurno(new Pierde2Turnos());
+        ficha.cambiarTurno();
+    }
+}
+
+function Dados(otrosDados) {
+    this.titulo = "Dados";
+    this.otrosDados = otrosDados;
+    this.cae = function (ficha) {
+        console.log("De dado a dado y tiro porque me ha tocado");
+        ficha.moverSinCaer(this.otrosDados);
+    }
+}
+
+function Pozo() {
+    this.titulo = "Pozo";
+    this.pozo = undefined;
+    this.cae = function (ficha) {
+        if (this.pozo) {
+            this.pozo.estado = new Vivo();
+        };
+        console.log("Caiste en el pozo");
+        this.pozo = ficha.jugador;
+        ficha.jugador.estado = new EnPozo();
+        ficha.cambiarTurno();
+    }
+}
+
+function Laberinto() {
+    this.titulo = "Laberinto";
+    this.cae = function (ficha) {
+        console.log("Caíste en el Laberinto");
+        ficha.pierdeTurno(new Pierde2Turnos());
+        ficha.cambiarTurno();
+    }
+}
+
+function Carcel() {
+    this.titulo = "Carcel";
+    this.cae = function (ficha) {
+        console.log("Caíste en la Cárcel");
+        ficha.pierdeTurno(new Pierde3Turnos());
+        ficha.cambiarTurno();
+    }
+}
+
+function Calavera() {
+    this.titulo = "Calavera";
+    this.cae = function (ficha) {
+        console.log("Caíste en la Calavera");
+        ficha.moverSinCaer(0);
+        ficha.cambiarTurno();
+    }
+}
+
+function Fin() {
+    this.titulo = "Fin";
+    this.cae = function (ficha) {
+        ficha.jugador.juego.fase = new FaseFin(ficha.juego);
+        console.log("Fin del juego");
+    }
+}
+
+>>>>>>> 0f2abb40384488379e44fb25f26f8a0fe83aef1a
 var Ficha = function(color){
 	this.color=color;
 	this.libre=true;
@@ -446,6 +559,7 @@ var Ficha = function(color){
 	}
 }
 
+<<<<<<< HEAD
 /*
 var Ficha = function(color,jugador){
 	this.color=color;
@@ -473,6 +587,14 @@ var Ficha = function(color,jugador){
     };
     this.pierdeTurno=function(obj){
     	this.jugador.pierdeTurno(obj);
+=======
+function MeToca() {
+    this.nombre = "MeToca";
+    this.lanzar = function (jugador) {
+        var numero = Dado.tirar();
+        console.log("Tirada: " + numero);
+        jugador.ficha.mover(numero);
+>>>>>>> 0f2abb40384488379e44fb25f26f8a0fe83aef1a
     }
 }
 */
