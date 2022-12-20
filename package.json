@@ -2,7 +2,7 @@
   "name": "laoca",
   "version": "0.0.1",
   "dependencies": {
-    "express": "^4.10.2"
+    "express": "^4.17.2"
   },
   "description": "ERROR: No README data found!",
   "main": "index.js",
